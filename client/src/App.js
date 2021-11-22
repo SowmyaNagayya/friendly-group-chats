@@ -1,18 +1,7 @@
-import './App.css';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import Header from './components/Header';
-import Creategroup from './components/pages/Creategroup';
-import Dashboard from './components/pages/Dashboard';
-import Groupchat from './components/pages/Groupchat';
-import Updategroup from './components/pages/Updategroup';
+import React from "react";
+import Container from "./components/Container";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <Header />
-    </div>
-  );
-}
+const App = () => <Container />;
 
 export default App;
