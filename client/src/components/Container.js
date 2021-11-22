@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Signup from './components/Signup';
-import Login from './components/Login';
-import Header from './components/Header';
-import Creategroup from './components/pages/Creategroup';
-import Dashboard from './components/pages/Dashboard';
-import Groupchat from './components/pages/Groupchat';
-import Updategroup from './components/pages/Updategroup';
+import Signup from './Signup';
+import Login from './Login';
+import Header from './Header';
+import Creategroup from './pages/Creategroup';
+import Dashboard from './pages/Dashboard';
+import Groupchat from './pages/Groupchat';
+import Updategroup from './pages/Updategroup';
 
 export default function Container() {
     const [currentPage, setCurrentPage] = useState('Login');
