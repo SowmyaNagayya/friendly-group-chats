@@ -1,0 +1,22 @@
+{
+  "name": "friendly-group-chats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SowmyaNagayya/friendly-group-chats.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SowmyaNagayya/friendly-group-chats/issues"
+  },
+  "homepage": "https://github.com/SowmyaNagayya/friendly-group-chats#readme"
+}
