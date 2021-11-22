@@ -1,19 +1,15 @@
 const { Schema, model } = require('mongoose');
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  groupChats: {
+  messages: {
     type: String,
-    required: true,
-  },
-  inStock: {
-    type: Boolean,
-    default: true,
   },
 });
 
-const User = model('User', UserSchema);
+const User = model('User', userSchema);
+
 module.exports = User;
