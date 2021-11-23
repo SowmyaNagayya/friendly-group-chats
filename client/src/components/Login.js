@@ -1,9 +1,10 @@
 import React, {useState, useEffect } from "react";
 import { checkPassword } from "../../src/utils/helpers";
+import { createUser, userLogin } from '../utils/api';
 import Signup from "./Signup";
 
 export default function Login() {
-
+  const [userFormData, setUserFormData] = useState({ username: '', password: '' });
     // Make text of error messages red
     const errorStyle = {
     color: "red"
@@ -11,14 +12,14 @@ export default function Login() {
 
     const defaultLoginFormValues = { username:"", password:""}
 
-    const [formData, setFormData] = useState(defaultLoginFormValues);
+    // const [formData, setFormData] = useState(defaultLoginFormValues);
     const [errorMessage, setErrorMessage] = useState('');
     const [currentView, setCurrentView] = useState("Login");
     
     // we make a copy of formData   ...formData
     // we use setFormData to replace the old formData with the updated one
     const handleInputChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value});
+        setFormData({...userFormData, [e.target.name]: e.target.value});
     };
     
     const handleFormSubmit = (e) => {
@@ -38,6 +39,9 @@ export default function Login() {
                 `Choose a more secure password for the account: ${formData.userName}`
             );
             return;
+        }
+        if (formData.username && formData.password) {
+
         }
         setFormData(defaultLoginFormValues);
         
