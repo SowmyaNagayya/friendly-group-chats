@@ -1,14 +1,16 @@
 import React, {useState, useEffect } from "react";
-import { checkPassword, validateEmail } from "../../src/utils/helpers";
+import Login from "./Login";
+import { checkPassword } from "../../src/utils/helpers";
 
 export default function Signup() {
 
+    console.log("Started Signup");
     // Make text of error messages red
     const errorStyle = {
     color: "red"
 }
 
-    const defaultSignupFormValues = { username:"", email:"", password:""}
+    const defaultSignupFormValues = { username:"", password:""}
 
     const [formData, setFormData] = useState(defaultSignupFormValues);
     const [errorMessage, setErrorMessage] = useState('');
@@ -24,8 +26,8 @@ export default function Signup() {
         e.preventDefault();
 
         // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-        if(!validateEmail(formData.email) || !formData.username) {
-            setErrorMessage('Email or username is invalid');
+        if(!formData.username) {
+            setErrorMessage('Username is invalid');
             
             // We want to exit out of this code block if something is wrong so that the user can correct it
             return;
@@ -39,9 +41,22 @@ export default function Signup() {
         }
         setFormData(defaultSignupFormValues);
     };
+    const loginclick = () => {
+       
+        window.location.href="/";
+      //  <Signup/>
+        alert("Hello");
+        // return(
+            
+        // <Signup />
+        // );
+    }
+   
     
 
     return (
+        <>
+       { console.log("UP")}
       <div className="container my-5">
         <div className="row justify-content-center">
           <div className="col-6">
@@ -50,25 +65,17 @@ export default function Signup() {
               <div className="mb-3">
                 <label htmlFor="nameInput" className="form-label">Username</label>
                 <input type="text" className="form-control" value={formData.username} name="username" placeholder="Bob"onChange={handleInputChange} />
-                {/* <p style={errorStyle}>{errorMessageUsername}</p> */}
-              </div>
-            
-              <div className="mb-3">
-                <label htmlFor="emailInput" className="form-label">Email</label>
-                <input value={formData.email} type="text" className="form-control" name="email" placeholder="Bob@mail.com" onChange={handleInputChange} />
-                {/* <p style={errorStyle}>{errorMessageEmail}</p> */}
               </div>
             
               <div className="mb-3">
                 <label htmlFor="passwordInput" className="form-label">Password</label>
                 <textarea value={formData.password} type="password" className="form-control" name="passowrd" placeholder="password" onChange={handleInputChange} />
-                {/* <p style={errorStyle}>{errorMessagePassword}</p> */}
               </div>           
             
             <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Signup</button>
             &nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;
-            <button type="submit" className="btn btn-primary" >Login</button>
+            <button type="submit" className="btn btn-primary" onClick={loginclick}>Login</button>
           
           </form>
           {errorMessage && (
@@ -79,6 +86,6 @@ export default function Signup() {
         </div>
       </div>
     </div>
-
+</>
     )
 }
