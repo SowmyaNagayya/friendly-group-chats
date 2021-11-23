@@ -12,14 +12,17 @@ export default function Login() {
 
     const defaultLoginFormValues = { username:"", password:""}
 
-    // const [formData, setFormData] = useState(defaultLoginFormValues);
+    // const [userFormData, setuserFormData] = useState(defaultLoginFormValues);
     const [errorMessage, setErrorMessage] = useState('');
     const [currentView, setCurrentView] = useState("Login");
     
-    // we make a copy of formData   ...formData
-    // we use setFormData to replace the old formData with the updated one
+    // we make a copy of userFormData   ...userFormData
+    // we use setuserFormData to replace the old userFormData with the updated one
     const handleInputChange = (e) => {
-      setUserFormData({...userFormData, [e.target.name]: e.target.value});
+
+        setUserFormData({...userFormData, [e.target.name]: e.target.value});
+
+
     };
     
     const handleFormSubmit = (e) => {
@@ -36,13 +39,20 @@ export default function Login() {
         // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
         if(!checkPassword(userFormData.password)) {
             setErrorMessage(
-                `Choose a more secure password for the account: ${userFormData.username}`
+
+                `Choose a more secure password for the account: ${userFormData.userName}`
+
             );
             return;
         } else
         if (userFormData.username && userFormData.password) {
             window.location.href="/dashboard";
         }
+
+        if (userFormData.username && userFormData.password) {
+
+        }
+
         setUserFormData(defaultLoginFormValues);
         
     };

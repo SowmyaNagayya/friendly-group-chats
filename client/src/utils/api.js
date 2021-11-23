@@ -17,5 +17,12 @@ export const createUser = (userData) => {
       body: JSON.stringify(userData),
     });
   };
- 
-  
+
+  export const fetchGroups = (user) => {
+    return fetch('/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }

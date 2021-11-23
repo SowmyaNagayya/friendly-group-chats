@@ -1,6 +1,17 @@
 import React, {useState, useEffect } from "react";
+import { fetchGroups } from '../../utils/api';
 
 export default function Dashboard(props) {
+
+    //  We need a way to pull the data from mongo db
+
+    useEffect(() => {
+        let fetch = fetchGroups()
+        console.log(fetch);
+    })
+
+
+
 
     const createGroupclick = () => {
        
@@ -12,6 +23,7 @@ export default function Dashboard(props) {
         // <Signup />
         // );
     }
+
 
     return (
         <>
