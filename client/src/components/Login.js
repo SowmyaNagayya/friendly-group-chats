@@ -13,6 +13,7 @@ export default function Login() {
 
     const [formData, setFormData] = useState(defaultLoginFormValues);
     const [errorMessage, setErrorMessage] = useState('');
+    const [currentView, setCurrentView] = useState("Login");
     
     // we make a copy of formData   ...formData
     // we use setFormData to replace the old formData with the updated one
@@ -39,6 +40,7 @@ export default function Login() {
             return;
         }
         setFormData(defaultLoginFormValues);
+        
     };
 
     const signupclick = () => {
