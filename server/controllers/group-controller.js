@@ -4,7 +4,7 @@ const { Group } = require('../models');
 module.exports = {
   // get all groups for dahsboard
   async getAllGroups(req, res) {
-    const allGroups = await Group.find({});
+    const allGroups = await Group.find({ });
 
     if (!allGroups) {
       return res.status(400).json({message: 'No groups found'});

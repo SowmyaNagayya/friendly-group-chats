@@ -12,14 +12,14 @@ export default function Login() {
 
     const defaultLoginFormValues = { username:"", password:""}
 
-    // const [formData, setFormData] = useState(defaultLoginFormValues);
+    // const [userFormData, setuserFormData] = useState(defaultLoginFormValues);
     const [errorMessage, setErrorMessage] = useState('');
     const [currentView, setCurrentView] = useState("Login");
     
-    // we make a copy of formData   ...formData
-    // we use setFormData to replace the old formData with the updated one
+    // we make a copy of userFormData   ...userFormData
+    // we use setuserFormData to replace the old userFormData with the updated one
     const handleInputChange = (e) => {
-        setFormData({...userFormData, [e.target.name]: e.target.value});
+        setUserFormData({...userFormData, [e.target.name]: e.target.value});
     };
     
     const handleFormSubmit = (e) => {
@@ -27,23 +27,23 @@ export default function Login() {
         e.preventDefault();
 
         // First we check to see if the email is not valid or if the userName is empty. If so we set an error message to be displayed on the page.
-        if(!formData.username) {
+        if(!userFormData.username) {
             setErrorMessage('Username is invalid');
             
             // We want to exit out of this code block if something is wrong so that the user can correct it
             return;
         }
         // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
-        if(!checkPassword(formData.password)) {
+        if(!checkPassword(userFormData.password)) {
             setErrorMessage(
-                `Choose a more secure password for the account: ${formData.userName}`
+                `Choose a more secure password for the account: ${userFormData.userName}`
             );
             return;
         }
-        if (formData.username && formData.password) {
+        if (userFormData.username && userFormData.password) {
 
         }
-        setFormData(defaultLoginFormValues);
+        setUserFormData(defaultLoginFormValues);
         
     };
 
@@ -67,12 +67,12 @@ export default function Login() {
             <form>
               <div className="mb-3">
                 <label htmlFor="nameInput" className="form-label">Username</label>
-                <input type="text" className="form-control" value={formData.username} name="username" placeholder="Bob"onChange={handleInputChange} />
+                <input type="text" className="form-control" value={userFormData.username} name="username" placeholder="Bob"onChange={handleInputChange} />
               </div>
             
               <div className="mb-3">
                 <label htmlFor="passwordInput" className="form-label">Password</label>
-                <input value={formData.password} type="password" className="form-control" name="password" placeholder="password" onChange={handleInputChange} />
+                <input value={userFormData.password} type="password" className="form-control" name="password" placeholder="password" onChange={handleInputChange} />
               </div>           
             
             <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Login</button>
