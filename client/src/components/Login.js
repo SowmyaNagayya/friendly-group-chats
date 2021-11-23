@@ -66,7 +66,7 @@ export default function Login() {
             
               <div className="mb-3">
                 <label htmlFor="passwordInput" className="form-label">Password</label>
-                <textarea value={formData.password} type="password" className="form-control" name="passowrd" placeholder="password" onChange={handleInputChange} />
+                <input value={formData.password} type="password" className="form-control" name="password" placeholder="password" onChange={handleInputChange} />
               </div>           
             
             <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Login</button>
