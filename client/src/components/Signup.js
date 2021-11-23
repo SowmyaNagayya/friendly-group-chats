@@ -45,10 +45,10 @@ export default function Signup() {
       <div className="container my-5">
         <div className="row justify-content-center">
           <div className="col-6">
-            <h2 className="text-center">Contact Me</h2>
+            <h2 className="text-center">Sign Up Here</h2>
             <form>
               <div className="mb-3">
-                <label htmlFor="nameInput" className="form-label">Name</label>
+                <label htmlFor="nameInput" className="form-label">Username</label>
                 <input type="text" className="form-control" value={formData.username} name="username" placeholder="Bob"onChange={handleInputChange} />
                 {/* <p style={errorStyle}>{errorMessageUsername}</p> */}
               </div>
@@ -66,6 +66,9 @@ export default function Signup() {
               </div>           
             
             <button type="submit" className="btn btn-primary" onClick={handleFormSubmit}>Signup</button>
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            <button type="submit" className="btn btn-primary" >Login</button>
           
           </form>
           {errorMessage && (
