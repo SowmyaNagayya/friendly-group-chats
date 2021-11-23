@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/SowmyaNagayya/friendly-group-chats/issues"
   },
-  "homepage": "https://github.com/SowmyaNagayya/friendly-group-chats#readme"
+  "homepage": "https://github.com/SowmyaNagayya/friendly-group-chats#readme",
+  "devDependencies": {
+    "concurrently": "^6.4.0"
+  }
 }
