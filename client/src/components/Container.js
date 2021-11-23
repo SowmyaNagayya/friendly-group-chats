@@ -10,7 +10,7 @@ import Updategroup from './pages/Updategroup';
 import { Switch } from 'react-router';
 
 export default function Container() {
-    // const [currentPage, setCurrentPage] = useState('Login');
+    const [currentPage, setCurrentPage] = useState('Login');
   
     // const renderPage = () => {
     //   if (currentPage === 'Login') {
