@@ -19,7 +19,10 @@ export default function Login() {
     // we make a copy of userFormData   ...userFormData
     // we use setuserFormData to replace the old userFormData with the updated one
     const handleInputChange = (e) => {
+
         setUserFormData({...userFormData, [e.target.name]: e.target.value});
+
+
     };
     
     const handleFormSubmit = (e) => {
@@ -36,26 +39,28 @@ export default function Login() {
         // Then we check to see if the password is not valid. If so, we set an error message regarding the password.
         if(!checkPassword(userFormData.password)) {
             setErrorMessage(
+
                 `Choose a more secure password for the account: ${userFormData.userName}`
+
             );
             return;
+        } else
+        if (userFormData.username && userFormData.password) {
+            window.location.href="/dashboard";
         }
+
         if (userFormData.username && userFormData.password) {
 
         }
+
         setUserFormData(defaultLoginFormValues);
         
     };
 
     const signupclick = () => {
        
-        window.location.href="/Signup";
-      //  <Signup/>
+        window.location.href="/signup";
         alert("Hello");
-        // return(
-            
-        // <Signup />
-        // );
     }
     
 
