@@ -6,14 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "watch": "nodemon server.js",
     "seed": "node seeds/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13"
   },
   "devDependencies": {

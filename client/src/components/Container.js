@@ -17,7 +17,7 @@ export default function Container() {
               <Route exact path="/group/:id" element={<Groupchat />} />
               <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path="/newgroup" element={<Creategroup />} />
-              <Route exact path="/" element={<Login />} />
+              <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />
               <Route exact path="/editgroup/:id" element={<Updategroup />} />
             </Routes>
