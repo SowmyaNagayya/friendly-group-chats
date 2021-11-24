@@ -16,17 +16,17 @@ export default function Container() {
           <Router>
             <Routes>
             {Auth.loggedIn() ? (
-              <>
+               <> 
               <Route exact path="/group/:id" element={<Groupchat />} />
               <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path="/newgroup" element={<Creategroup />} />
               <Route exact path="/editgroup/:id" element={<Updategroup />} />
               </>
             ) : (
-              <>
+               <> 
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/signup" element={<Signup />} />
-              </>
+              </> 
             )}
               
             </Routes>
