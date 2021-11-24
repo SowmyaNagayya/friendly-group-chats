@@ -1,6 +1,14 @@
 import React, {useState, useEffect } from "react";
+// import {userLogin} from '../utils/api';
+// import Auth from '../utils/auth';
 
 export default function Creategroup() {
+  const [createGroup, setCreateGroup] = useState("");
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setCreateGroup({ ...createGroup, [name]: value });
+  };
 
     return (
       <div className="container my-5">
@@ -10,7 +18,7 @@ export default function Creategroup() {
             <form>
               <div className="mb-3">
                 <label htmlFor="groupnameInput" className="form-label">GroupName</label>
-                <input type="text" className="form-control" value="" name="groupname" placeholder="GroupA"/>
+                <input type="text" className="form-control" value={createGroup} name="groupname" placeholder="GroupA" onChange={handleInputChange}/>
               </div>
             
               
