@@ -25,4 +25,24 @@ export const createUser = (userData) => {
         'Content-Type': 'application/json',
       },
     });
-  }
+  };
+
+  //I think we need to pass in the group id to complete the route
+  export const fetchGroup = (user) => {
+    return fetch('/api/group/:id', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+
+  //I think we need to pass i nthe group id to complete the route
+  export const fetchChats = (group) => {
+    return fetch('./api/chat/:id', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
