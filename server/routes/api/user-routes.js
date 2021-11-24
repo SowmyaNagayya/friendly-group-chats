@@ -7,7 +7,7 @@ const router = require('express').Router();
   } = require('../../controllers/user-controller');
 
 //use express router to get, post, put, delete here
-  router.route('/').post(createUser);
   router.route('/login').post(userLogin);
+  router.route('/').post(createUser);
 
 module.exports = router;

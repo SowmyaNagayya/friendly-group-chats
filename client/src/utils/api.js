@@ -1,5 +1,5 @@
 export const createUser = (userData) => {
-    return fetch('/', {
+    return fetch('/api/user/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -9,7 +9,7 @@ export const createUser = (userData) => {
   };
   
   export const userLogin = (userData) => {
-    return fetch('/api/login', {
+    return fetch('/api/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -17,5 +17,12 @@ export const createUser = (userData) => {
       body: JSON.stringify(userData),
     });
   };
- 
-  
+
+  export const fetchGroups = (user) => {
+    return fetch('/api/group/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
