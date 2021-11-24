@@ -134,9 +134,9 @@ const LoginForm = () => {
 
     try {
       const data = await userLogin( {...userFormData} );
-      const final = await data.json();
-      console.log(final);
-      Auth.recordLogin(final.token);
+      const finalData = await data.json();
+      Auth.recordLogin(finalData.token);
+
     } catch (e) {
       console.log("Error")
       console.log(e);

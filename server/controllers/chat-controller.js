@@ -9,4 +9,13 @@ module.exports = {
         }
         res.status(200).json(chat);
       },
+
+    async getAllChatsForOneGroup (req, res) {
+      const allChats = await Chat.find({ });
+      //we need to find by specific group id
+      if(!allChats) {
+        return res.status(400).json({message: 'No chats found'});
+      }
+      res.status(200).json(allChats);
+    }
 }

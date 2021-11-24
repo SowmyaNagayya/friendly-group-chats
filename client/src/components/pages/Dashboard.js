@@ -3,18 +3,14 @@ import { fetchGroups } from '../../utils/api';
 
 export default function Dashboard(props) {
 
-    //  We need a way to pull the data from mongo db
-
     useEffect(() => {
         let fetch = fetchGroups()
         console.log(fetch);
+        // This should be fetching all the groups from the database
     })
 
-
-
-
     const createGroupclick = () => {
-       
+    
         window.location.href="/newgroup";
       //  <Signup/>
         alert("Hello");

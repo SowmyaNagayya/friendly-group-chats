@@ -1,6 +1,5 @@
 
 const { User } = require('../models');
-const { checkPassword } = require('../utils/helpers');
 const { signToken } = require('../utils/auth');
 
 module.exports = {
@@ -17,21 +16,17 @@ module.exports = {
 
   async userLogin(req, res) {
     const userData = await User.findOne({ where: { username: req.body.username} && {password: req.body.password}});
-    console.log(userData);
     if(!userData) {
-      res.status(400).json({ message: 'Incorrect username or password, please try again' });
+      res.status(400).json({ message: 'Incorrect username or password' });
       return;
     } 
-  
-    // const validPassword = await checkPassword(req.body.password);
-    const validPassword = req.body.password === userData.password;
+    // const correctPw = await userData.isCorrectPassword(userData.password);
+    //   if (!correctPw) {
+    //     res.status(400).json({ message: 'Incorrect password '});
+    //   }
 
-    if (!validPassword) {
-        res.status(400).json({ message: 'Incorrect username or password, please try again '});
-        return;
-    }
-    console.log(validPassword);
-    const token = signToken(userData);
+    const token = signToken( userData );
+    console.log(token);
     delete userData.password;
     res.json( { token, userData } );
   }
