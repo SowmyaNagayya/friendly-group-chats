@@ -17,6 +17,7 @@ export default function Container() {
             <Routes>
             {Auth.loggedIn() ? (
               <>
+              <Route exact path="/login" element={<Login />} />
               <Route exact path="/group/:id" element={<Groupchat />} />
               <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path="/newgroup" element={<Creategroup />} />
@@ -24,7 +25,7 @@ export default function Container() {
               </>
             ) : (
               <>
-              <Route exact path="/login" element={<Login />} />
+              {/* <Route exact path="/login" element={<Login />} /> */}
               <Route exact path="/signup" element={<Signup />} />
               </>
             )}
