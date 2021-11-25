@@ -51,6 +51,8 @@ const LoginForm = () => {
 
   return (
     <>
+    <div className="row">
+    <div className="d-flex justify-content-center">
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert
           dismissible
@@ -97,13 +99,19 @@ const LoginForm = () => {
           Login
         </Button>
       </Form>
-      <Button
-        variant="primary"
-        href="/signup"
-      >
-        Sign-up Instead
-      </Button>
-    </>
+      </div>
+    </div>
+      <div className="row">
+        <div className="col-12 p-5 d-flex justify-content-center">
+          <Button
+            variant="primary"
+            href="/signup"
+          >
+            Sign-up Instead
+          </Button>
+        </div>
+      </div>
+      </>
   );
 };
 

@@ -18,8 +18,8 @@ export const createUser = (userData) => {
     });
   };
 
-  export const fetchGroups = (user) => {
-    return fetch('/api/group/', {
+  export const fetchGroups = async(user) => {
+    return await fetch('/api/group/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -39,10 +39,19 @@ export const createUser = (userData) => {
 
   //I think we need to pass i nthe group id to complete the route
   export const fetchChats = (group) => {
-    return fetch('./api/chat/:id', {
+    return fetch('/api/chat/:id', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
     });
   };
+
+  export const fetchUsers = () => {
+    return fetch('/api/user/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }

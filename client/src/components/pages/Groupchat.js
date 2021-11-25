@@ -3,15 +3,18 @@ import { fetchGroup,  fetchChats} from '../../utils/api';
 
 export default function Groupchat() {
     // need to fetchGroup
-    useEffect(() => {
-        let groupFetch = fetchGroup();
-        let chatsFetch = fetchChats();
+    useEffect( async () => {
+        let groupFetch = await fetchGroup();
+        let groupFetchData = await groupFetch.json();
+
+        let chatsFetch = await fetchChats();
+        let chatsFetchData = await chatsFetch.json();
 
         //this should console.log specific group data
-        console.log(groupFetch);
+        console.log(groupFetchData);
 
         //this should console.log chats for a specific group
-        console.log(chatsFetch);
+        console.log(chatsFetchData);
     })
 
     return (
