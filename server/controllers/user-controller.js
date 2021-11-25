@@ -26,7 +26,6 @@ module.exports = {
     //   }
 
     const token = signToken( userData );
-    console.log(token);
     delete userData.password;
     res.json( { token, userData } );
   }

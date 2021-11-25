@@ -94,9 +94,15 @@ const LoginForm = () => {
           type="submit"
           variant="success"
         >
-          Submit
+          Login
         </Button>
       </Form>
+      <Button
+        variant="primary"
+        href="/signup"
+      >
+        Sign-up Instead
+      </Button>
     </>
   );
 };
