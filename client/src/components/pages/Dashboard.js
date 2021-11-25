@@ -4,10 +4,23 @@ import { fetchGroups } from '../../utils/api';
 
 export default function Dashboard(props) {
 
-    useEffect(() => {
-        let fetch = fetchGroups()
-        console.log(fetch);
+    useEffect( async () => {
+        const groupCard = document.getElementById('groupCard');
+        let groupFetch = await fetchGroups();
+        let groupFetchData = await groupFetch.json();
+
         // This should be fetching all the groups from the database
+        console.log(groupFetchData);
+
+        groupFetchData.forEach(group => {
+        let template =`
+        <div>
+            <div>space for icon</div>
+            <p>${group.name}</p>
+        </div>`;
+
+        groupCard.push(template);
+        });
     })
 
     const createGroupclick = () => {
@@ -26,8 +39,11 @@ export default function Dashboard(props) {
         <>
             <div className="row">
                 <button type="button" class="btn btn-success" onClick={createGroupclick}>Create New Chat</button>
+                <div id="groupCard"></div>
+                
                 {/* {props.groups.map((group) => (
                     <div class="col-sm-6">
+                    
                         <div class="card" key={group.id}>
                             <div class="card-body">
                                 <h5 class="card-title">{group.name}</h5>

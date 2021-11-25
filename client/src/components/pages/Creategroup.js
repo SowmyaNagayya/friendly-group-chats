@@ -1,9 +1,18 @@
 import React, {useState, useEffect } from "react";
+import { fetchUsers } from '../../utils/api';
 // import {userLogin} from '../utils/api';
 // import Auth from '../utils/auth';
 
 export default function Creategroup() {
   const [createGroup, setCreateGroup] = useState("");
+
+  useEffect( async () => {
+    let userFetch = await fetchUsers();
+    let userFetchData = await userFetch.json();
+
+    // This var should let us have a running list of all the users in the database
+    console.log(userFetchData);
+  })
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
