@@ -5,7 +5,7 @@ import { fetchGroups } from '../../utils/api';
 export default function Dashboard(props) {
 
     useEffect( async () => {
-        const groupCard = document.getElementById('groupCard');
+        const groupCard = [];
         let groupFetch = await fetchGroups();
         let groupFetchData = await groupFetch.json();
 
@@ -20,6 +20,7 @@ export default function Dashboard(props) {
         </div>`;
 
         groupCard.push(template);
+        console.log(groupCard);
         });
     })
 
