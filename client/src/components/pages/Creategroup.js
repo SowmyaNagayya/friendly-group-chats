@@ -1,28 +1,31 @@
 import React, {useState, useEffect } from "react";
 import { fetchUsers } from '../../utils/api';
-import { Form,Select, Button } from 'react-bootstrap';
+import { Form, Select, Button } from 'react-bootstrap';
 
 // import {userLogin} from '../utils/api';
 // import Auth from '../utils/auth';
 
 export default function Creategroup() {
-  const [createGroup, setCreateGroup] = useState("");
-  const [allUsers, setAllUsers]=useState([])
+  const [ createGroup, setCreateGroup ] = useState("");
+
+  const [ allUsers, setAllUsers ] = useState([])
 
   const options =null;
   useEffect( async () => {
     let userFetch = await fetchUsers();
     let userFetchData = await userFetch.json();
 
-    // This var should let us have a running list of all the users in the database
     console.log(JSON.stringify(userFetchData) + "Hello");
-    let options =userFetchData.map((item) => {
+
+    let options = userFetchData.map((item) => {
       return (
         <option key={item._id} value={item.username}>{item.username}
         </option>
       )
     })
+
     setAllUsers(options)
+
     console.log(JSON.stringify(options) + " what options")
     
    // state(state => ({ ...state, allUsers:options }));
