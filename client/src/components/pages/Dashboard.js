@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, {useState, setState,useEffect } from "react";
 import { fetchGroups } from '../../utils/api';
 import { Card, Button } from 'react-bootstrap';
 
@@ -6,6 +6,7 @@ import { Card, Button } from 'react-bootstrap';
 export default function Dashboard(props) {
     
     const [ groups, setGroups ] = useState([]);
+    const [list, setList] = useState([]);
 
     const getGroupsData = async() => {
         let groupFetch = await fetchGroups();
@@ -42,6 +43,7 @@ export default function Dashboard(props) {
     }
 
     const certainGroupClick = (e) => {
+
         const id = e.currentTarget.id;
         console.log(id.trim());
 
@@ -49,6 +51,22 @@ export default function Dashboard(props) {
         window.location.href=`/group/${newid}`;
         // alert("something");
     }
+
+        const id = e.target.id
+        console.log(id)
+        window.location.href=`/group/${id.trim()}`;
+        // alert("something");
+    }
+
+        const editGroupClick = () => {
+            window.location.href="/newgroup";
+          //  <Signup/>
+            alert("Hello");
+            // return(
+            // <Signup />
+            // );
+        }
+    
 
     return (
         <>
@@ -69,6 +87,8 @@ export default function Dashboard(props) {
                     </div>
                 ))} */}
             </div>
+
+            
         </>
     )
 }

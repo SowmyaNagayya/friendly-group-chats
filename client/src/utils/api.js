@@ -66,4 +66,16 @@ export const createUser = (userData) => {
       },
       body: JSON.stringify(groupData)
     });
-  };
+  }
+
+  //Update Group
+  export const updateGroup = (updategroupData) => {
+    alert("hello");
+    return fetch('/api/group/:id', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updategroupData)
+    });
+  }
