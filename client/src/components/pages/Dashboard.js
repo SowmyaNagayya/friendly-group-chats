@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from "react";
 import { fetchGroups } from '../../utils/api';
-import { Card } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 
 export default function Dashboard(props) {
@@ -20,15 +20,15 @@ export default function Dashboard(props) {
     const renderCard = (card, index) => {
         return (
             <Card border="info" style={{ width: '18rem' }} key={index}>
-                    <Card.Body>
-                        <Card.Title>{card.name}</Card.Title>
-                        <Card.Text>
-                            This is where most recent message will go
-                        </Card.Text>
-                        <Card.Link id={card._id.trim()} href="#" onClick={certainGroupClick}>See Chat</Card.Link>
-                        <Card.Link href="#" onClick={removeGroupClick}>Delete Chat</Card.Link>
-                    </Card.Body>
-                </Card>
+                <Card.Body>
+                    <Card.Title>{card.name}</Card.Title>
+                    <Card.Text>
+                        This is where most recent message will go
+                    </Card.Text>
+                    {/* <Card.Link id={card.id} href="#" onClick={certainGroupClick}>See Chat</Card.Link> */}
+                    <Button id={card._id} variant="primary" onClick={certainGroupClick}>Go somewhere</Button>
+                </Card.Body>
+            </Card>
         )
     }
 
@@ -42,19 +42,13 @@ export default function Dashboard(props) {
     }
 
     const certainGroupClick = (e) => {
-        const id = e.target.id
-        console.log(id)
-        window.location.href=`/group/${id.trim()}`;
+        const id = e.currentTarget.id;
+        console.log(id.trim());
+
+        const newid = id.trim()
+        window.location.href=`/group/${newid}`;
         // alert("something");
     }
-
-    const removeGroupClick = () => {
-        alert("removed group");
-
-        // I need a way to get the group clicked and hit the route for deleting that group
-
-    }
-
 
     return (
         <>

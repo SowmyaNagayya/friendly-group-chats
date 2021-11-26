@@ -24,8 +24,9 @@ module.exports = {
 
   // get one group
   async getGroup({ params }, res) {
-    const group = await Group.findOne({ _id: params.id });
-
+    console.log('route hit');
+    const group = await Group.findOne({where: { _id: params.id }});
+    console.log(group);
     if (!group) {
       return res.status(400).json({ message: 'No group found by that id' });
     }
