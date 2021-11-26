@@ -1,9 +1,23 @@
-import React, {useState, useEffect } from "react";
-import {FaRegWindowClose} from 'react-icons/fa';
+import React from "react";
+import {FaHome, FaRegWindowClose} from 'react-icons/fa';
 import Auth from '../utils/auth';
 
 
 export default function Header() {
+
+    const renderHome = () => {
+        if (Auth.loggedIn()) {
+          return  <a href="/dashboard" 
+                    style={{fontSize: "18px", textDecoration: "none", textTransform: "uppercase", color: "white"}}>
+                        <div className= "bi d-flex justify-content-center mx-auto mb-1">
+                            <FaHome style={{fontSize: "2.5rem", color: "white"}} />
+                        </div>
+                    Home
+                    </a>;
+        }
+        else return;
+      };
+
 
     const renderLogout = () => {
         if (Auth.loggedIn()) {
@@ -27,7 +41,12 @@ export default function Header() {
                         <h1 id="header-name">Friendly Group Chats</h1>
                     </div>
                     <div className="d-flex col-md-12 col-lg-7 justify-content-center">
-                        {renderLogout()}
+                        <div className="p-4">
+                            {renderHome()}
+                        </div>
+                        <div className="p-4">
+                            {renderLogout()}
+                        </div>
                     </div>
                 </div>
             </div>
