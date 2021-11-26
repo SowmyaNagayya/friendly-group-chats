@@ -7,30 +7,26 @@ import Dashboard from './pages/Dashboard';
 import Groupchat from './pages/Groupchat';
 import Updategroup from './pages/Updategroup';
 import Auth from '../utils/auth';
-import {useState} from 'react';
 
 export default function Container() {
-  const [currentPage, setCurrentPage] = useState('');
 
   const renderPage = () => {
     if (Auth.loggedIn()) {
       return <Dashboard />;
-    }
-    else return <Login />;
-  };
-
-  const handlePageChange = (page) => setCurrentPage(page);
+    } else return;
+  } 
 
     return (
         <div id="main-container">
-          <Header currentPage={currentPage} handlePageChange={handlePageChange} />
+          <Header />
             {renderPage()}
           <Router>
             <Routes>
+              <Route exact path='/' element={<Login />} />
+              <Route exact path='/signup' element={<Signup />} />
               <Route exact path="/group/:id" element={<Groupchat />} />
               <Route exact path="/newgroup" element={<Creategroup />} />
               <Route exact path="/editgroup/:id" element={<Updategroup />} />
-              <Route exact path="/signup" element={<Signup />} />
             </Routes>
           </Router>
         </div>
