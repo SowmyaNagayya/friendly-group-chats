@@ -10,7 +10,8 @@ module.exports = {
     if (!user) {
       return res.status(400).json({message: 'Unable to create user'});
     }
-    res.status(200).json(user);
+    const token = signToken( user );
+    res.status(200).json({token, user});
   },
   // create message still not sure if we are gonna have chats attached to user or group
 
