@@ -25,7 +25,7 @@ export default function Dashboard(props) {
                         <Card.Text>
                             This is where most recent message will go
                         </Card.Text>
-                        <Card.Link href="#" onClick={certainGroupClick}>See Chat</Card.Link>
+                        <Card.Link id={card._id.trim()} href="#" onClick={certainGroupClick}>See Chat</Card.Link>
                         <Card.Link href="#" onClick={removeGroupClick}>Delete Chat</Card.Link>
                     </Card.Body>
                 </Card>
@@ -41,14 +41,18 @@ export default function Dashboard(props) {
         // );
     }
 
-    const certainGroupClick = () => {
-        window.location.href="/:id";
-        alert("something");
+    const certainGroupClick = (e) => {
+        const id = e.target.id
+        console.log(id)
+        window.location.href=`/group/${id.trim()}`;
+        // alert("something");
     }
 
     const removeGroupClick = () => {
-        window.location.href="/:id";
         alert("removed group");
+
+        // I need a way to get the group clicked and hit the route for deleting that group
+
     }
 
 
