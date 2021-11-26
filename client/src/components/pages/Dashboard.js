@@ -1,4 +1,4 @@
-import React, {useState, useEffect } from "react";
+import React, {useState, setState,useEffect } from "react";
 import { fetchGroups } from '../../utils/api';
 import { Card } from 'react-bootstrap';
 
@@ -6,6 +6,7 @@ import { Card } from 'react-bootstrap';
 export default function Dashboard(props) {
     
     const [ groups, setGroups ] = useState([]);
+    const [list, setList] = useState([]);
 
     const getGroupsData = async() => {
         let groupFetch = await fetchGroups();
@@ -27,6 +28,23 @@ export default function Dashboard(props) {
                         </Card.Text>
                         <Card.Link id={card._id.trim()} href="#" onClick={certainGroupClick}>See Chat</Card.Link>
                         <Card.Link href="#" onClick={removeGroupClick}>Delete Chat</Card.Link>
+                        <div className="row">
+                <button type="button" class="btn btn-success" onClick={editGroupClick}>Update Group</button>
+                
+
+                {/* {props.groups.map((group) => (
+                    <div class="col-sm-6">
+                    
+                        <div class="card" key={group.id}>
+                            <div class="card-body">
+                                <h5 class="card-title">{group.name}</h5>
+                                <p class="card-text">{group.chats}</p>
+                                <a href='/group/${group.id}' class="btn btn-primary">Go to chat</a>
+                            </div>
+                        </div>
+                    </div>
+                ))} */}
+            </div>
                     </Card.Body>
                 </Card>
         )
@@ -49,11 +67,20 @@ export default function Dashboard(props) {
     }
 
     const removeGroupClick = () => {
-        alert("removed group");
+       
+  }
 
         // I need a way to get the group clicked and hit the route for deleting that group
 
-    }
+        const editGroupClick = () => {
+            window.location.href="/newgroup";
+          //  <Signup/>
+            alert("Hello");
+            // return(
+            // <Signup />
+            // );
+        }
+    
 
 
     return (
@@ -75,6 +102,8 @@ export default function Dashboard(props) {
                     </div>
                 ))} */}
             </div>
+
+            
         </>
     )
 }
