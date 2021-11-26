@@ -55,3 +55,15 @@ export const createUser = (userData) => {
       },
     });
   }
+
+  //Create group data
+  export const createGroup = (groupData) => {
+    alert("hello");
+    return fetch('/api/group/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(groupData)
+    });
+  };

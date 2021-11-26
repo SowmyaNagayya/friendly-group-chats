@@ -1,38 +1,54 @@
 import React, {useState, useEffect } from "react";
 import { fetchGroups } from '../../utils/api';
+import { Card } from 'react-bootstrap';
 
 
 export default function Dashboard(props) {
+    
+    const [ groups, setGroups ] = useState([]);
 
-    useEffect( async () => {
-        const groupCard = [];
+    const getGroupsData = async() => {
         let groupFetch = await fetchGroups();
         let groupFetchData = await groupFetch.json();
+        setGroups(groupFetchData);
+    }
 
-        // This should be fetching all the groups from the database
-        console.log(groupFetchData);
+    useEffect( () => {
+        getGroupsData()
+    }, [])
 
-        groupFetchData.forEach(group => {
-        let template =`
-        <div>
-            <div>space for icon</div>
-            <p>${group.name}</p>
-        </div>`;
-
-        groupCard.push(template);
-        console.log(groupCard);
-        });
-    })
+    const renderCard = (card, index) => {
+        return (
+            <Card border="info" style={{ width: '18rem' }} key={index}>
+                    <Card.Body>
+                        <Card.Title>{card.name}</Card.Title>
+                        <Card.Text>
+                            This is where most recent message will go
+                        </Card.Text>
+                        <Card.Link href="#" onClick={certainGroupClick}>See Chat</Card.Link>
+                        <Card.Link href="#" onClick={removeGroupClick}>Delete Chat</Card.Link>
+                    </Card.Body>
+                </Card>
+        )
+    }
 
     const createGroupclick = () => {
-    
         window.location.href="/newgroup";
       //  <Signup/>
         alert("Hello");
         // return(
-            
         // <Signup />
         // );
+    }
+
+    const certainGroupClick = () => {
+        window.location.href="/:id";
+        alert("something");
+    }
+
+    const removeGroupClick = () => {
+        window.location.href="/:id";
+        alert("removed group");
     }
 
 
@@ -40,8 +56,8 @@ export default function Dashboard(props) {
         <>
             <div className="row">
                 <button type="button" class="btn btn-success" onClick={createGroupclick}>Create New Chat</button>
-                <div id="groupCard"></div>
-                
+                <div>{groups.map(renderCard)}</div>
+
                 {/* {props.groups.map((group) => (
                     <div class="col-sm-6">
                     
