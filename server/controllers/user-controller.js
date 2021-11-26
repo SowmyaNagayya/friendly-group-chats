@@ -4,19 +4,13 @@ const { signToken } = require('../utils/auth');
 
 module.exports = {
   // create User
-  async createUser(req, res) {
-    const user = await User.create({
-      username: req.body.username,
-      password: req.body.password,
-    });
-
-    const betterUser = userData.get({plain: true});
-    console.log(betterUser);
-    res.status(200).json(betterUser);
+  async createUser({ body }, res) {
+    const user = await User.create(body);
 
     if (!user) {
       return res.status(400).json({message: 'Unable to create user'});
     }
+    res.status(200).json(user);
   },
   // create message still not sure if we are gonna have chats attached to user or group
 
@@ -32,6 +26,7 @@ module.exports = {
     //   }
 
     const token = signToken( userData );
+    console.log(token);
     delete userData.password;
     res.json( { token, userData } );
   },
