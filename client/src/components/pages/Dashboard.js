@@ -52,12 +52,6 @@ export default function Dashboard(props) {
         // alert("something");
     }
 
-        const id = e.target.id
-        console.log(id)
-        window.location.href=`/group/${id.trim()}`;
-        // alert("something");
-    }
-
         const editGroupClick = () => {
             window.location.href="/newgroup";
           //  <Signup/>
