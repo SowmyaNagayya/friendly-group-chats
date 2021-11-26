@@ -19,7 +19,8 @@ export default function Groupchat() {
 
     return (
         <div>
-            
+            <p>this is the groupchat component loading</p>
+            <p> Hello World!</p>
         </div>
         
     )
