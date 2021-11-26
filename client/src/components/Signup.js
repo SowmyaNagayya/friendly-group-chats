@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { createUser } from '../utils/api';
 
+import { createUser } from '../utils/api';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
@@ -15,16 +15,6 @@ const SignupForm = () => {
   const [validated] = useState(false);
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
-
-  const addUser = createUser();
-
-  // useEffect(() => {
-  //   if (error) {
-  //     setShowAlert(true);
-  //   } else {
-  //     setShowAlert(false);
-  //   }
-  // }, [error]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -42,18 +32,23 @@ const SignupForm = () => {
     }
 
     try {
-      const { data } = await addUser({
-        variables: { ...userFormData },
-      });
-      console.log(data);
-      Auth.login(data.addUser.token);
+      const response = await createUser(userFormData);
+
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
+
+      const user  = await response.json();
+      const finalUser = await user;
+      //figure out token - undefined in local storage as of now
+      Auth.recordLogin(finalUser.token);
     } catch (err) {
       console.error(err);
+      setShowAlert(true);
     }
 
     setUserFormData({
       username: '',
-      email: '',
       password: '',
     });
   };
