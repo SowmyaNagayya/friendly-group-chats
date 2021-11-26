@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Routes,  Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Signup from './Signup';
 import Login from './Login';
 import Header from './Header';
@@ -10,19 +10,13 @@ import Auth from '../utils/auth';
 
 export default function Container() {
 
-  const renderPage = () => {
-    if (Auth.loggedIn()) {
-      return <Dashboard />;
-    } else return;
-  } 
-
     return (
         <div id="main-container">
           <Header />
-            {renderPage()}
           <Router>
             <Routes>
-              <Route exact path='/' element={<Login />} />
+              <Route exact path="/" element={<Login />} />
+              <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path='/signup' element={<Signup />} />
               <Route exact path="/group/:id" element={<Groupchat />} />
               <Route exact path="/newgroup" element={<Creategroup />} />
@@ -31,4 +25,4 @@ export default function Container() {
           </Router>
         </div>
     );
-  }
+}
