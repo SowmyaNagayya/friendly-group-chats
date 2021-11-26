@@ -40,8 +40,8 @@ const SignupForm = () => {
 
       const user  = await response.json();
       const finalUser = await user;
-      //figure out token - undefined in local storage as of now
       Auth.recordLogin(finalUser.token);
+      
     } catch (err) {
       console.error(err);
       setShowAlert(true);
