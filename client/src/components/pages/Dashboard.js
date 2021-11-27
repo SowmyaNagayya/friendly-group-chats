@@ -1,6 +1,7 @@
 import React, {useState, setState,useEffect } from "react";
-import { fetchGroups } from '../../utils/api';
+import { fetchGroups, fetchChats } from '../../utils/api';
 import { Card, Button } from 'react-bootstrap';
+import { useQuery } from 'react-query';
 
 
 export default function Dashboard(props) {
@@ -12,6 +13,15 @@ export default function Dashboard(props) {
         let groupFetch = await fetchGroups();
         let groupFetchData = await groupFetch.json();
         setGroups(groupFetchData);
+    }
+
+    const useQuery = () => {
+        'body',
+        fetchChats,
+        {
+            refetchInterval: 2000,
+            refetchIntervalInBackground: true,
+        }
     }
 
     useEffect( () => {
