@@ -1,13 +1,17 @@
 import React, {useState, useEffect } from "react";
-import { fetchUsers, updateGroup } from '../../utils/api';
+import { fetchUsers ,updateGroup} from '../../utils/api';
 import { Form,Select, Button } from 'react-bootstrap';
 
-export default function Updategroup(props) {
-    const [updategroup, setUpdateGroup] = useState("");
+// import {userLogin} from '../utils/api';
+// import Auth from '../utils/auth';
 
-const [allUsers, setAllUsers]=useState([])
+export default function Creategroup() {
+  const [updateGroupName, setUpdateGroupName] = useState("");
+  const [allUsers, setAllUsers]=useState([])
   const [selectedUsers, setSelectedUsers]=useState([])
   const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
   const options =null;
   useEffect( async () => {
     let userFetch = await fetchUsers();
@@ -28,7 +32,7 @@ const [allUsers, setAllUsers]=useState([])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUpdateGroup({ ...updategroup, [name]: value });
+    setUpdateGroupName({ ...updateGroupName, [name]: value });
   };
 
   
@@ -36,7 +40,7 @@ const [allUsers, setAllUsers]=useState([])
    
     event.preventDefault();
     const formGroup = event.currentTarget; 
-    console.log("here" + updategroup.groupname + selectedUsers );
+    console.log("here" + updateGroupName.groupname + selectedUsers );
 
     if(formGroup.checkValidity() === false) {
           event.preventDefault();
@@ -44,20 +48,29 @@ const [allUsers, setAllUsers]=useState([])
         }
 
     try {
-      var name = JSON.stringify(updategroup.groupname);
+      var name = JSON.stringify(updateGroupName.groupname);
       var users = selectedUsers;
       
       var groupData = {name,users}
      
-      const data = await updateGroup( {variables:{...groupData}})
+      const response = await updateGroup( groupData)
+      alert("Submitted");
 
-      
+     
+      if (!response.ok) {
+              throw new Error('something went wrong!');
+            }
 
-    } catch (e) {
-      console.log("Error")
-      alert(e);
-    }
-  }
+            const group  = await response.json();
+            const finalGroup = await group;
+            
+          } catch (e) {
+            console.log("Error")
+            setShowAlert(true);
+          }
+          setUpdateGroupName(updateGroupName)
+          setSelectedUsers(selectedUsers)
+        }
 
   const handleUserChange=  (event) => {
     var options = event.target.options;
@@ -72,29 +85,9 @@ const [allUsers, setAllUsers]=useState([])
     //alert(value + "my selected values")
   }
 
-  // const handleFormSubmit = async (event) => {
-  //   event.preventDefault();
-  //   const formGroup = event.currentTarget; 
-  //   alert(formGroup)
-  //   if(formGroup.checkValidity() === false) {
-  //     event.preventDefault();
-  //     event.stopPropagation();
-  //   }
+  
 
-
-    // try {
-    //   const data = await createGroup( {variables:{...createGroup})
-    //   // const finalData = await data.json();
-
-    // } catch (e) {
-    //   console.log("Error")
-    //   console.log(e);
-    // }
-
-    // clear form values
-    // setCreateGroup(createGroup);
-    //setAllUsers(allUsers);
-  // }
+    
 
     return (
       <Form  noValidate validated={validated} onSubmit={handleFormSubmit}>
@@ -105,7 +98,7 @@ const [allUsers, setAllUsers]=useState([])
             placeholder="Your Groupname"
             name="groupname"
             onChange={handleInputChange}
-            value={updategroup.name}
+            value={updateGroupName.name}
             required
           />
               
