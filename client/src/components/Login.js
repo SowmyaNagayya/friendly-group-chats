@@ -25,21 +25,26 @@ const LoginForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.preventDefault();
+    //   event.stopPropagation();
+    // }
 
     try {
-      const data = await userLogin( {...userFormData} );
-      const finalData = await data.json();
-      Auth.recordLogin(finalData.token);
+      const response = await userLogin(userFormData);
+      if (!response.ok) {
+        throw new Error('something went wrong!');
+      }
 
-    } catch (e) {
-      console.log("Error")
-      console.log(e);
+      const { token, user } = await response.json();
+      Auth.recordLogin(token);
+      
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
     }
+
 
     // clear form values
     setUserFormData({
