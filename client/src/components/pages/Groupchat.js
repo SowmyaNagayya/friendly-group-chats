@@ -73,6 +73,7 @@ export default function Groupchat(props) {
         <button type="button" class="btn btn-success" onClick={UpdateGroupclick}>Update Group</button>
         &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
         <button type="button" class="btn btn-success" onClick={deleteGroupclick}>Delete Group</button>
         <div>
             <p>this is the groupchat component loading</p>
