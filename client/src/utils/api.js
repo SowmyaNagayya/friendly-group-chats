@@ -88,3 +88,15 @@ export const createUser = (userData) => {
       body: JSON.stringify(updategroupData)
     });
   }
+
+  //Delete group
+  export const deleteGroup = (id) => {
+    alert("hello");
+    return fetch('/api/group/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(deleteGroup)
+    });
+  }
