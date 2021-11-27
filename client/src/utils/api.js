@@ -78,9 +78,9 @@ export const createUser = (userData) => {
   }
 
   //Update Group
-  export const updateGroup = (updategroupData) => {
+  export const updateGroup = (updategroupData,id) => {
     alert("hello");
-    return fetch('/api/group/:id', {
+    return fetch('/api/group/' + id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
