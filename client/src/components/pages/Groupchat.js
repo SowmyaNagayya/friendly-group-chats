@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from "react";
-import { fetchGroup,  fetchChats, updateGroup} from '../../utils/api';
+import { fetchGroup,  fetchChats, updateGroup, deleteGroup} from '../../utils/api';
 import { Card, Button } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 
@@ -56,7 +56,8 @@ export default function Groupchat(props) {
         // );
     }
 
-    const deleteGroupclick = () => {
+    const deleteGroupclick = async () => {
+        const response = await deleteGroup(id) 
         window.location.href="/dashboard";
       //  <Signup/>
         alert("Hello");
@@ -70,6 +71,7 @@ export default function Groupchat(props) {
     return (
         <>
         <button type="button" class="btn btn-success" onClick={UpdateGroupclick}>Update Group</button>
+        &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
         &nbsp;&nbsp;&nbsp;
         <button type="button" class="btn btn-success" onClick={deleteGroupclick}>Delete Group</button>
