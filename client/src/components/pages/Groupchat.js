@@ -1,10 +1,12 @@
 import React, {useState, useEffect } from "react";
-import { fetchGroup,  fetchChats} from '../../utils/api';
+import { fetchGroup,  fetchChats, updateGroup} from '../../utils/api';
 import { Card, Button } from 'react-bootstrap';
+import {useParams} from "react-router-dom";
 
-export default function Groupchat() {
+export default function Groupchat(props) {
     const [ chat, setChat ] = useState([]);
-
+    const [groupID,setGrouID]=useState('');
+    const {id} = useParams()
     const getChatData = async() => {
         let chatsFetch = await fetchChats();
         let chatsFetchData = await chatsFetch.json();
@@ -35,13 +37,27 @@ export default function Groupchat() {
 
 
         //this should console.log specific group data
-        console.log(groupFetchData);
-
+        console.log(groupFetchData._id + "groupdata");
+        setGrouID(groupFetchData._id)
         getChatData();
     }, [])
 
     const UpdateGroupclick = () => {
-        window.location.href="/editgroup/:id";
+       
+        window.location.href="/editgroup/" + id;
+      //  <Signup/>
+        alert("Hello");
+        
+        // props.onSubmit({
+        //     id: groupID
+        //   });
+        // return( 
+        // <Signup />
+        // );
+    }
+
+    const deleteGroupclick = () => {
+        window.location.href="/dashboard";
       //  <Signup/>
         alert("Hello");
         // return(
@@ -49,9 +65,14 @@ export default function Groupchat() {
         // );
     }
 
+
+
     return (
         <>
         <button type="button" class="btn btn-success" onClick={UpdateGroupclick}>Update Group</button>
+        &nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-success" onClick={deleteGroupclick}>Delete Group</button>
         <div>
             <p>this is the groupchat component loading</p>
             <p> Hello World!</p>

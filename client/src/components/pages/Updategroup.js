@@ -1,25 +1,31 @@
 import React, {useState, useEffect } from "react";
-import { fetchUsers ,updateGroup} from '../../utils/api';
+import { fetchGroup ,fetchUsers,updateGroup} from '../../utils/api';
 import { Form,Select, Button } from 'react-bootstrap';
+import {useParams} from "react-router-dom";
+//import { param } from "../../../../server/routes/api";
 
 // import {userLogin} from '../utils/api';
 // import Auth from '../utils/auth';
 
-export default function Creategroup() {
+export default function Updategroup(props) {
   const [updateGroupName, setUpdateGroupName] = useState("");
   const [allUsers, setAllUsers]=useState([])
   const [selectedUsers, setSelectedUsers]=useState([])
   const [validated] = useState(false);
+  const {id} = useParams()
   // set state for alert
+  
   const [showAlert, setShowAlert] = useState(false);
   const options =null;
   useEffect( async () => {
-    let userFetch = await fetchUsers();
-    let userFetchData = await userFetch.json();    
+    console.log(id)
+    console.log(JSON.stringify(props) + "my group id");
+    let groupFetch = await fetchUsers();
+    let groupFetchData = await groupFetch.json();    
 
     // This var should let us have a running list of all the users in the database
-    console.log(JSON.stringify(userFetchData) + "Hello");
-    let options =userFetchData.map((item) => {
+    //== console.log(JSON.stringify(groupFetchData) + "Hello");
+    let options =groupFetchData.map((item) => {
       return (
         <option key={item._id} value={item._id}>{item.username}
         </option>
@@ -32,7 +38,7 @@ export default function Creategroup() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setUpdateGroupName({ ...updateGroupName, [name]: value });
+    setUpdateGroupName(value);
   };
 
   
@@ -40,20 +46,20 @@ export default function Creategroup() {
    
     event.preventDefault();
     const formGroup = event.currentTarget; 
-    console.log("here" + updateGroupName.groupname + selectedUsers );
-
+    console.log("here" + updateGroupName + selectedUsers );
+    
     if(formGroup.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
 
     try {
-      var name = JSON.stringify(updateGroupName.groupname);
+      var name = updateGroupName;
       var users = selectedUsers;
       
       var groupData = {name,users}
      
-      const response = await updateGroup( groupData)
+      const response = await updateGroup( groupData,id)
       alert("Submitted");
 
      
@@ -85,6 +91,13 @@ export default function Creategroup() {
     //alert(value + "my selected values")
   }
 
+  const handleUpdateGroup = () => {
+    const groupData = {
+
+    }
+console.log(updateGroupName,selectedUsers)
+  }
+
   
 
     
@@ -96,14 +109,13 @@ export default function Creategroup() {
           <Form.Control
             type="text"
             placeholder="Your Groupname"
-            name="groupname"
-            onChange={handleInputChange}
-            value={updateGroupName.name}
+            onChange={(event)=> setUpdateGroupName(event.target.value)}
+            value={updateGroupName}
             required
           />
               
           <Form.Label htmlFor="addfriend">Add Your Friend To Group</Form.Label>
-          <Form.Control as="select" multiple onChange={handleUserChange}>
+          <Form.Control name="" as="select" multiple onChange={handleUserChange}>
             {allUsers}
           </Form.Control>
                 {/* <Form.Select
@@ -114,6 +126,7 @@ export default function Creategroup() {
      </Form.Group>
           <Button
           //  disabled={!(createGroup.name && allUsers.username)}
+          handleUpdateGroup={handleUpdateGroup}
             type="submit"
             variant="success" >
               Update Group

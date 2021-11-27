@@ -34,8 +34,12 @@ module.exports = {
   },
 
   // update a group This one maybe wrong
-  async updateGroup({ body }, res) {
-    const group = await Group.findOneAndUpdate(body)
+  async updateGroup({ body, params }, res) {
+    console.log(params.id,body)
+    const group = await Group.findOneAndUpdate({_id:params.id},{
+      name: body.name,
+      users: body.users
+    })
 
     if (!group) {
       return res.status(400).json({message: 'Unable to create group'});
