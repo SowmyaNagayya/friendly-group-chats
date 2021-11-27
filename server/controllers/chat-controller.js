@@ -11,7 +11,7 @@ module.exports = {
       },
 
     async getAllChatsForOneGroup (req, res) {
-      const allChats = await Chat.find({ });
+      const allChats = await Chat.find({where: { group: req.params.id}});
       //we need to find by specific group id
       if(!allChats) {
         return res.status(400).json({message: 'No chats found'});
