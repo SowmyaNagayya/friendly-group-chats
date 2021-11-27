@@ -52,14 +52,7 @@ export default function Dashboard(props) {
         // alert("something");
     }
 
-        const editGroupClick = () => {
-            window.location.href="/newgroup";
-          //  <Signup/>
-            alert("Hello");
-            // return(
-            // <Signup />
-            // );
-        }
+        
     
 
     return (

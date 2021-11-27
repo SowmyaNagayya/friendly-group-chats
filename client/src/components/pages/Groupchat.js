@@ -38,14 +38,26 @@ export default function Groupchat() {
         console.log(groupFetchData);
 
         getChatData();
-    })
+    }, [])
+
+    const UpdateGroupclick = () => {
+        window.location.href="/updateGroup";
+      //  <Signup/>
+        alert("Hello");
+        // return(
+        // <Signup />
+        // );
+    }
 
     return (
+        <>
+        <button type="button" class="btn btn-success" onClick={UpdateGroupclick}>Update Group</button>
         <div>
             <p>this is the groupchat component loading</p>
             <p> Hello World!</p>
             <div>{chat.map(renderCard)}</div>
         </div>
+        </>
         
     )
 }

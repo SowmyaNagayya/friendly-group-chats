@@ -10,6 +10,8 @@ export default function Creategroup() {
   const [allUsers, setAllUsers]=useState([])
   const [selectedUsers, setSelectedUsers]=useState([])
   const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
   const options =null;
   useEffect( async () => {
     let userFetch = await fetchUsers();
@@ -51,15 +53,24 @@ export default function Creategroup() {
       
       var groupData = {name,users}
      
-      const data = await createGroup( {variables:{...groupData}})
+      const response = await createGroup( groupData)
       alert("Submitted");
-     
 
-    } catch (e) {
-      console.log("Error")
-      alert(e);
-    }
-  }
+     
+      if (!response.ok) {
+              throw new Error('something went wrong!');
+            }
+
+            const group  = await response.json();
+            const finalGroup = await group;
+            
+          } catch (e) {
+            console.log("Error")
+            setShowAlert(true);
+          }
+          setCreateGroupName(createGroupName)
+          setSelectedUsers(selectedUsers)
+        }
 
   const handleUserChange=  (event) => {
     var options = event.target.options;
