@@ -58,7 +58,9 @@ export default function Dashboard(props) {
     return (
         <>
             <div className="row">
-                <button type="button" class="btn btn-success" onClick={createGroupclick}>Create New Chat</button>
+                <div className="p-4 d-flex justify-content-center">
+                    <button type="button" class="btn btn-primary" onClick={createGroupclick}>Create New Group</button>
+                </div>
                 <div>{groups.map(renderCard)}</div>
 
                 {/* {props.groups.map((group) => (
