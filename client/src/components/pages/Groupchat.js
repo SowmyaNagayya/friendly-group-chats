@@ -41,7 +41,7 @@ export default function Groupchat() {
     }, [])
 
     const UpdateGroupclick = () => {
-        window.location.href="/updateGroup";
+        window.location.href="/editgroup/:id";
       //  <Signup/>
         alert("Hello");
         // return(
