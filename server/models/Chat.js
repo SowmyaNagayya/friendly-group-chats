@@ -16,7 +16,7 @@ const chatSchema = new Schema({
         ref: Group
     },
 });
-  
+
 const Chat = model('Chat', chatSchema);
-  
+
 module.exports = Chat;
