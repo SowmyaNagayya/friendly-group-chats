@@ -8,7 +8,7 @@ export default function Groupchat(props) {
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput] = useState('');
-    console.log(users);
+    console.log(id);
     // const [ groupID, setGroupID ]= useState(id);
 
     //Fetches User Data
@@ -102,7 +102,7 @@ export default function Groupchat(props) {
         setInput({...input, [e.target.name]: e.target.value});
     }
 
-    const createChatClick = ( e ) => {
+    const createChatClick = ( e, req ) => {
         //  Prevent page reload
         e.preventDefault();
 
@@ -110,9 +110,8 @@ export default function Groupchat(props) {
         console.log(input);
 
         //  TODO: get final value of input for the body, we still need a way to get group id and user id then use createChat to submit that to database and set form empty again.
-
         
-        //  This is putting it into the database but everysingle time a letter is pressed on keyboard
+        //Figure out how to pass the group id in - can pass in as object?
         createChat(input);
     }
 

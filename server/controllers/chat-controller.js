@@ -1,8 +1,11 @@
 const {Chat} = require("../models");
 
 module.exports = { 
-    async createChat({ body }, res) {
-        const chat = await Chat.create(body);
+    async createChat(req, res) {
+        const chat = await Chat.create({
+          ...req.body,
+          user: req.session.user_id,
+        });
     
         if (!chat) {
           return res.status(400).json({message: 'Unable to create chat'});
