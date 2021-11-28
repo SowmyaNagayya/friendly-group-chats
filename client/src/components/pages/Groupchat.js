@@ -54,7 +54,7 @@ export default function Groupchat(props) {
             //  Used this console to check what I was getting back not needed for functionality
             // console.log(username);
             return (
-                <Card border="success" style={{ width: '18rem' }} key={index}>
+                <Card style={{ width: '18rem', border: ".25rem solid #539987", boxShadow: "2px 2px 5px gray" }} key={index}>
                     <Card.Body>
                         <Card.Title>{username}</Card.Title>
                         <Card.Text>{card.body}</Card.Text>
@@ -128,23 +128,30 @@ export default function Groupchat(props) {
 
     return (
         <>
-            <button type="button" class="btn btn-success" onClick={UpdateGroupClick}>Update Group</button>
-            &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-success" onClick={deleteGroupClick}>Delete Group</button>
-            <div>
-                <p>this is the groupchat component loading</p>
-                <p> Hello World!</p>
-                <div>{chat.map(renderCard)}</div>
+        <div className="row">
+            <div className="p-4 d-flex justify-content-center">
+                <button type="button" className="btn btn-primary col-2" onClick={UpdateGroupClick}>Update Group</button>
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                <button type="button" className="btn btn-danger col-2" onClick={deleteGroupClick}>Delete Group</button>
             </div>
-            <Form>
-                <Form.Group className="mb-3" controlId="sendMessageForm">
-                    <Form.Label>Send a Message</Form.Label>
-                    <Form.Control type="text" placeholder="Message"/>
-                </Form.Group>
-                <Button variant="success" type="submit" id="messageBtn" onClick={createChatClick}>Send Message</Button>
-            </Form>
+        </div>
+            <div>
+                <div className='d-flex justify-content-center'>{chat.map(renderCard)}</div>
+            </div>
+            <div className="row p-4">
+                <div className="d-flex justify-content-center">
+                    <Form className="p-4" style={{ border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}}>
+                        <Form.Group className="mb-3" controlId="sendMessageForm">
+                            <Form.Control type="text" placeholder="Message" className="col-4"/>
+                        </Form.Group>
+                        <div className="d-flex justify-content-center">
+                            <Button variant="secondary" type="submit" id="messageBtn" onClick={createChatClick}>Send Message</Button>
+                        </div>
+                    </Form>
+                </div>
+            </div>
         </>
         
     )

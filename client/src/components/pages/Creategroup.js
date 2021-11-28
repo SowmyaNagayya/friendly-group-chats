@@ -90,34 +90,42 @@ export default function Creategroup() {
     
 
     return (
-      <Form  noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <Form.Group >
-          <Form.Label htmlFor="groupname">Groupname</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Your Groupname"
-            name="groupname"
-            onChange={handleInputChange}
-            value={createGroupName.name}
-            required
-          />
-              
-          <Form.Label htmlFor="addfriend">Add Your Friend To Group</Form.Label>
-          <Form.Control as="select" multiple onChange={handleUserChange}>
-            {allUsers}
-          </Form.Control>
-                {/* <Form.Select
-                  data={userFetchData.map((item) =>item.username)}
-                  selectMultiple={true}
-                  touchUi={false}
-                /> */}
-     </Form.Group>
-          <Button
-          //  disabled={!(createGroup.name && allUsers.username)}
-            type="submit"
-            variant="success" >
-              Create Group
-          </Button>
-      </Form> 
+      <>
+        <div className="row">
+          <div className="p-4 d-flex justify-content-center">
+            <Form className="p-4" style={{ width: "30rem", border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}} noValidate validated={validated} onSubmit={handleFormSubmit}>
+              <Form.Group className="p-4">
+                  <Form.Label htmlFor="groupname">Group Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Your Group Name"
+                    name="groupname"
+                    onChange={handleInputChange}
+                    value={createGroupName.name}
+                    required
+                  />
+                      
+                  <Form.Label htmlFor="addfriend">Add Friends to Your Group</Form.Label>
+                  <Form.Control as="select" multiple onChange={handleUserChange}>
+                    {allUsers}
+                  </Form.Control>
+                        {/* <Form.Select
+                          data={userFetchData.map((item) =>item.username)}
+                          selectMultiple={true}
+                          touchUi={false}
+                        /> */}
+              </Form.Group>
+              <div className="d-flex justify-content-center">
+                  <Button
+                  //  disabled={!(createGroup.name && allUsers.username)}
+                    type="submit"
+                    variant="secondary" >
+                      Create Group
+                  </Button>
+                </div>
+            </Form> 
+          </div>
+        </div>
+      </>
     )
 }
