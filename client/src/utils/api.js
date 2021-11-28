@@ -112,3 +112,12 @@ export const createUser = (userData) => {
       body: JSON.stringify(data)
     });
   };
+
+  export const userLogout = (userData) => {
+    return fetch('/api/user/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };

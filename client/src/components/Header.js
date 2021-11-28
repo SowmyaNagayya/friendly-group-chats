@@ -1,6 +1,7 @@
 import React from "react";
 import {FaHome, FaRegWindowClose} from 'react-icons/fa';
 import Auth from '../utils/auth';
+import {userLogout } from "../utils/api";
 
 
 export default function Header() {
@@ -18,11 +19,18 @@ export default function Header() {
         else return;
       };
 
+      const handleLogout= () => {
+          userLogout().then(response=> {
+              window.location.replace("/")
+          })
+
+      }
+
 
     const renderLogout = () => {
         if (Auth.loggedIn()) {
-          return  <a href="/" 
-                    onClick={Auth.logout}
+          return  <a href="#" 
+                    onClick={handleLogout}
                     style={{fontSize: "18px", textDecoration: "none", textTransform: "uppercase", color: "white"}}>
                         <div className= "bi d-flex justify-content-center mx-auto mb-1">
                             <FaRegWindowClose style={{fontSize: "2.5rem", color: "white"}} />

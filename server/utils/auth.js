@@ -26,6 +26,15 @@ module.exports = {
 
     return req;
   },
+   withAuth: (req, res, next) => {
+    // If the user is not logged in, redirect the request to the login route
+    console.log(req.session)
+     if (!req.session.user_id) {
+       res.redirect("/");
+     } else {
+       next();
+     }
+   },
   signToken: function ({ username, password, _id }) {
     const payload = { username, password, _id };
 
