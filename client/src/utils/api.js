@@ -10,7 +10,9 @@ export const getMe = (token) => {
 export const createUser = (userData) => {
     return fetch('/api/user/signup', {
       method: 'POST',
+      credentials: 'include',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData)
@@ -20,6 +22,7 @@ export const createUser = (userData) => {
   export const userLogin = (userData) => {
     return fetch('/api/user/', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -63,7 +66,7 @@ export const createUser = (userData) => {
         'Content-Type': 'application/json',
       },
     });
-  }
+  };
 
   //Create group data
   export const createGroup = (groupData) => {

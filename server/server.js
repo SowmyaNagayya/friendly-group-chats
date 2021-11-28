@@ -20,6 +20,7 @@ const sess = {
   },
   resave: false,
   saveUninitialized: true,
+  credentials: 'include',
 };
 
 app.use(session(sess));
