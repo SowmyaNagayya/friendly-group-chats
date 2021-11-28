@@ -7,10 +7,11 @@ const router = require('express').Router();
     getGroup,
     updateGroup,
     removeGroup,
-  } = require('../../controllers/group-controller')
+  } = require('../../controllers/group-controller');
+const { withAuth } = require('../../utils/auth');
 
 //use express router to get, post, put, delete here
-  router.route('/').get(getAllGroups);
+  router.route('/').get(withAuth,getAllGroups);
   router.route('/').post(createGroup);
   router.route('/:id').get(getGroup);
   router.route('/:id').put(updateGroup);

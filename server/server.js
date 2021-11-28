@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
 const routes = require('./routes');
+const session = require('express-session');
 // const { authMiddleware } = require('./utils/auth');
 
 
@@ -12,6 +13,16 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {maxAge: 900000,
+  },
+  resave: false,
+  saveUninitialized: true,
+};
+
+app.use(session(sess));
 
 //  Update pathing when we can!
 if (process.env.NODE_ENV === 'production') {

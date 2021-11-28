@@ -1,10 +1,11 @@
 // logic for CRUD functions with group
 const { Group } = require('../models');
-
+const { withAuth } = require('../utils/auth');
 module.exports = {
   // get all groups for dahsboard
   async getAllGroups(req, res) {
-    const allGroups = await Group.find({ });
+    console.log(req.session)
+    const allGroups = await Group.find({users:{$all: [req.session.user_id]} });
 
     if (!allGroups) {
       return res.status(400).json({message: 'No groups found'});
