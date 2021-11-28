@@ -15,14 +15,14 @@ export default function Dashboard(props) {
         setGroups(groupFetchData);
     }
 
-    const useQuery = () => {
-        'body',
-        fetchChats,
-        {
-            refetchInterval: 2000,
-            refetchIntervalInBackground: true,
-        }
-    }
+    // useQuery( () => {
+    //     'body',
+    //     fetchChats,
+    //     {
+    //         refetchInterval: 2000,
+    //         refetchIntervalInBackground: true,
+    //     }
+    // })
 
     useEffect( () => {
         getGroupsData()
@@ -30,16 +30,18 @@ export default function Dashboard(props) {
 
     const renderCard = (card, index) => {
         return (
-            <Card border="info" style={{ width: '18rem' }} key={index}>
-                <Card.Body>
-                    <Card.Title>{card.name}</Card.Title>
-                    <Card.Text>
-                        This is where most recent message will go
-                    </Card.Text>
-                    {/* <Card.Link id={card.id} href="#" onClick={certainGroupClick}>See Chat</Card.Link> */}
-                    <Button id={card._id} variant="primary" onClick={certainGroupClick}>Go somewhere</Button>
-                </Card.Body>
-            </Card>
+            <div className="p-4">
+                <Card className="p-3" style={{ width: '18rem', border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray" }} key={index}>
+                    <Card.Body>
+                        <Card.Title>{card.name}</Card.Title>
+                        <Card.Text>
+                            This is where most recent message will go
+                        </Card.Text>
+                        {/* <Card.Link id={card.id} href="#" onClick={certainGroupClick}>See Chat</Card.Link> */}
+                        <Button id={card._id} variant="secondary" onClick={certainGroupClick}>Go to Group</Button>
+                    </Card.Body>
+                </Card>
+            </div>
         )
     }
 
@@ -71,7 +73,11 @@ export default function Dashboard(props) {
                 <div className="p-4 d-flex justify-content-center">
                     <button type="button" class="btn btn-primary" onClick={createGroupclick}>Create New Group</button>
                 </div>
-                <div>{groups.map(renderCard)}</div>
+                <div className="row">
+                    <div className="d-flex justify-content-center p-4">
+                        {groups.map(renderCard)}
+                    </div>
+                </div>
 
                 {/* {props.groups.map((group) => (
                     <div class="col-sm-6">
