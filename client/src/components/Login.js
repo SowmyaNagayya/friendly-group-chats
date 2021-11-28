@@ -57,7 +57,7 @@ const LoginForm = () => {
     <>
     <div className="row">
       <div className="d-flex justify-content-center p-4">
-        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+        <Form style={{ width: "30rem", border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}} noValidate validated={validated} onSubmit={handleFormSubmit}>
           <Alert
             dismissible
             onClose={() => setShowAlert(false)}
@@ -95,14 +95,16 @@ const LoginForm = () => {
               Password is required!
             </Form.Control.Feedback>
           </Form.Group>
-          <Button
-            className=" d-flex justify-content-center"
-            disabled={!(userFormData.username && userFormData.password)}
-            type="submit"
-            variant="success"
-          >
-            Login
-          </Button>
+          <div className=" p-4 d-flex justify-content-center">
+            <Button
+              className="d-flex justify-content-center"
+              disabled={!(userFormData.username && userFormData.password)}
+              type="submit"
+              variant="secondary"
+            >
+              Login
+            </Button>
+          </div>
         </Form>
       </div>
     </div>
