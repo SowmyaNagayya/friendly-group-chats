@@ -112,7 +112,7 @@ export default function Groupchat(props) {
         //  TODO: get final value of input for the body, we still need a way to get group id and user id then use createChat to submit that to database and set form empty again.
         
         //Figure out how to pass the group id in - can pass in as object?
-        createChat(input);
+        createChat({input, id});
     }
 
     return (

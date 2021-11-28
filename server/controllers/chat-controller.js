@@ -2,9 +2,11 @@ const {Chat} = require("../models");
 
 module.exports = { 
     async createChat(req, res) {
+      console.log(req.session.user_id)
         const chat = await Chat.create({
-          ...req.body,
+          body: req.body.input.body,
           user: req.session.user_id,
+          group: req.body.id,
         });
     
         if (!chat) {
