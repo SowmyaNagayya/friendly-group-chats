@@ -7,6 +7,7 @@ export default function Groupchat(props) {
     const { id } = useParams()
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
+    const [ input, setInput] = useState('');
     console.log(users);
     // const [ groupID, setGroupID ]= useState(id);
 
@@ -93,37 +94,26 @@ export default function Groupchat(props) {
         alert("Hello");
     }
 
-    //  TODO: Choose between this method and below method whatever works better
-    //  This method doesn't quite log what I need but seems to be more on the right track
-    // const createChatClick = async ( e ) => {
-    //     //  Prevent page reload
-    //     e.preventDefault();
 
-    //     //  Giving the events targets value a variable
-    //     const message = e.target.value;
 
-    //     //  Logging to test and getting nothing in console.
-    //     console.log(message);
-    // }
 
-    // TODO: Choose between this method and above method whatever works better
-    // This method logs the message but it's not quite right
-    const createChatClick = async ( e ) => {
+
+    const handleInput = (e) => {
+        setInput({...input, [e.target.name]: e.target.value});
+    }
+
+    const createChatClick = ( e ) => {
         //  Prevent page reload
         e.preventDefault();
 
-        //  Giving sendMessageForm a variable
-        const message = document.getElementById('sendMessageForm').value;
+        //  This is logging exactly what we need just putting it in the database everytime a button is hit.
+        console.log(input);
 
-        //  Stringifying that variable
-        JSON.stringify(message);
+        //  TODO: get final value of input for the body, we still need a way to get group id and user id then use createChat to submit that to database and set form empty again.
 
-        //  Logging that value
-        console.log(message);
-
-        //  This is calling the createChat route to put in the database but it doesn't right now
-        createChat(message);
-        //  TODO: Attach group id and user id to message
+        
+        //  This is putting it into the database but everysingle time a letter is pressed on keyboard
+        createChat(input);
     }
 
     return (
@@ -142,12 +132,12 @@ export default function Groupchat(props) {
             </div>
             <div className="row p-4">
                 <div className="d-flex justify-content-center">
-                    <Form className="p-4" style={{ border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}}>
+                    <Form onClick={createChatClick}   className="p-4" style={{ border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}}>
                         <Form.Group className="mb-3" controlId="sendMessageForm">
-                            <Form.Control type="text" placeholder="Message" className="col-4"/>
+                            <Form.Control onChange={handleInput} name='body' type="text" placeholder="Message" className="col-4"/>
                         </Form.Group>
                         <div className="d-flex justify-content-center">
-                            <Button variant="secondary" type="submit" id="messageBtn" onClick={createChatClick}>Send Message</Button>
+                            <Button variant="secondary" type="submit" id="messageBtn">Send Message</Button>
                         </div>
                     </Form>
                 </div>
