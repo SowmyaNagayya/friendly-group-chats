@@ -36,7 +36,7 @@ module.exports = {
   // update a group This one maybe wrong
   async updateGroup({ body, params }, res) {
     console.log(params.id,body)
-    const group = await Group.findOneAndUpdate({_id:params.id},{
+    const group = await Group.findOneAndUpdate({_id: params.id},{
       name: body.name,
       users: body.users
     })
