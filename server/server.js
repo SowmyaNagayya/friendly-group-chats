@@ -16,7 +16,9 @@ app.use(express.json());
 
 const sess = {
   secret: 'Super secret secret',
-  cookie: {maxAge: 900000,
+  cookie: {
+    path: '/',
+    maxAge: 900000,
   },
   resave: false,
   saveUninitialized: true,
