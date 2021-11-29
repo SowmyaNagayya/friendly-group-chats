@@ -1,28 +1,16 @@
-import React, {useState, setState,useEffect } from "react";
-import { fetchGroups, fetchChats } from '../../utils/api';
+import React, {useState, useEffect } from "react";
+import { fetchGroups } from '../../utils/api';
 import { Card, Button } from 'react-bootstrap';
-import { useQuery } from 'react-query';
-
 
 export default function Dashboard(props) {
     
     const [ groups, setGroups ] = useState([]);
-    const [list, setList] = useState([]);
 
     const getGroupsData = async() => {
         let groupFetch = await fetchGroups();
         let groupFetchData = await groupFetch.json();
         setGroups(groupFetchData);
     }
-
-    // useQuery( () => {
-    //     'body',
-    //     fetchChats,
-    //     {
-    //         refetchInterval: 2000,
-    //         refetchIntervalInBackground: true,
-    //     }
-    // })
 
     useEffect( () => {
         getGroupsData()
@@ -37,7 +25,6 @@ export default function Dashboard(props) {
                         <Card.Text>
                             This is where most recent message will go
                         </Card.Text>
-                        {/* <Card.Link id={card.id} href="#" onClick={certainGroupClick}>See Chat</Card.Link> */}
                         <Button id={card._id} variant="secondary" onClick={certainGroupClick}>Go to Group</Button>
                     </Card.Body>
                 </Card>
@@ -47,11 +34,6 @@ export default function Dashboard(props) {
 
     const createGroupclick = () => {
         window.location.href="/newgroup";
-      //  <Signup/>
-        alert("Hello");
-        // return(
-        // <Signup />
-        // );
     }
 
     const certainGroupClick = (e) => {
@@ -61,7 +43,6 @@ export default function Dashboard(props) {
 
         const newid = id.trim()
         window.location.href=`/group/${newid}`;
-        // alert("something");
     }
 
         
@@ -78,22 +59,7 @@ export default function Dashboard(props) {
                         {groups.map(renderCard)}
                     </div>
                 </div>
-
-                {/* {props.groups.map((group) => (
-                    <div class="col-sm-6">
-                    
-                        <div class="card" key={group.id}>
-                            <div class="card-body">
-                                <h5 class="card-title">{group.name}</h5>
-                                <p class="card-text">{group.chats}</p>
-                                <a href='/group/${group.id}' class="btn btn-primary">Go to chat</a>
-                            </div>
-                        </div>
-                    </div>
-                ))} */}
             </div>
-
-            
         </>
     )
 }
