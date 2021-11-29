@@ -2,12 +2,14 @@ import React, {useState, useEffect } from "react";
 import { fetchGroup,  fetchChats, updateGroup, deleteGroup, createChat, fetchUsers} from '../../utils/api';
 import { Card, Button, Form } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
+import { MDBContainer } from "mdbreact";
 
 export default function Groupchat(props) {
     const { id } = useParams()
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput] = useState('');
+    const [ currentUser, setUser ] = useState('');
     console.log(id);
     // const [ groupID, setGroupID ]= useState(id);
 
@@ -46,6 +48,7 @@ export default function Groupchat(props) {
         //  id === current groups id
         //  card.group === a group id attached to the comment it's looping through
         //  if id does not === card.group return and do nothing
+        
         if (id !== card.group) {
             return
         }   // else if id does === card.group run the getUsername function and return comment card to page
@@ -55,13 +58,9 @@ export default function Groupchat(props) {
             //  Used this console to check what I was getting back not needed for functionality
             // console.log(username);
             return (
-                <Card style={{ width: '18rem', border: ".25rem solid #539987", boxShadow: "2px 2px 5px gray" }} key={index}>
-                    <Card.Body>
-                        <Card.Title>{username}</Card.Title>
-                        <Card.Text>{card.body}</Card.Text>
-                        {/* <Button id={card._id} variant="success">Go somewhere</Button> */}
-                    </Card.Body>
-                </Card>
+                <div className="d-flex justify-content-center">
+                    <p>{card.body}</p>
+                </div>
             )
         }
     }
@@ -108,6 +107,8 @@ export default function Groupchat(props) {
         createChat({input, id});
     }
 
+    const scrollContainerStyle = { width: "800px", maxHeight: "400px" };
+
     return (
         <>
         <div className="row">
@@ -120,7 +121,11 @@ export default function Groupchat(props) {
             </div>
         </div>
             <div>
-                <div className='d-flex justify-content-center'>{chat.map(renderCard)}</div>
+                <MDBContainer>
+                    <div className="row scrollbar scrollbar-near-moon mt-5 mx-auto" style={scrollContainerStyle}>
+                        <div className='row'>{chat.map(renderCard)}</div>
+                    </div>
+                </MDBContainer>
             </div>
             <div className="row p-4">
                 <div className="d-flex justify-content-center">
