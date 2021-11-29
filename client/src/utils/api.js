@@ -39,7 +39,6 @@ export const createUser = (userData) => {
     });
   };
 
-  //I think we need to pass in the group id to complete the route
   export const fetchGroup = (id) => {
     return fetch(`/api/group/${id}`, {
       method: 'GET',
@@ -49,7 +48,6 @@ export const createUser = (userData) => {
     });
   };
 
-  //I think we need to pass i nthe group id to complete the route
   export const fetchChats = (id) => {
     return fetch(`/api/chat/${id}`, {
       method: 'GET',

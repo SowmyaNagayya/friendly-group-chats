@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from "react";
 import { fetchGroup,  fetchChats, updateGroup, deleteGroup, createChat, fetchUsers} from '../../utils/api';
-import { Card, Button, Form } from 'react-bootstrap';
+import {  Button, Form } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import { MDBContainer } from "mdbreact";
 
@@ -9,9 +9,6 @@ export default function Groupchat(props) {
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput] = useState('');
-    const [ currentUser, setUser ] = useState('');
-    console.log(id);
-    // const [ groupID, setGroupID ]= useState(id);
 
     //Fetches User Data
     const getUserData = async () => {
@@ -84,18 +81,12 @@ export default function Groupchat(props) {
 
     const UpdateGroupClick = () => {
         window.location.href="/editgroup/" + id;
-        alert("Hello"); 
     }
 
     const deleteGroupClick = async () => {
         const response = await deleteGroup(id) 
         window.location.href="/dashboard";
-        alert("Hello");
     }
-
-
-
-
 
     const handleInput = (e) => {
         setInput({...input, [e.target.name]: e.target.value});
