@@ -1,23 +1,25 @@
 import React, {useState, useEffect } from "react";
-import { fetchGroup,  fetchChats, updateGroup, deleteGroup, createChat, fetchUsers} from '../../utils/api';
-import {  Button, Form } from 'react-bootstrap';
+import { fetchGroup,  fetchChats, deleteGroup, createChat, fetchUsers} from '../../utils/api';
+import { Button, Form } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import { MDBContainer } from "mdbreact";
 
-export default function Groupchat(props) {
+export default function Groupchat() {
     const { id } = useParams()
+    console.log(id);
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput] = useState('');
+    // const [ currentUser, setUser ] = useState('');
+    const [ groupTitle, setGroupTitle ]= useState('');
+    console.log(groupTitle);
 
-    //Fetches User Data
     const getUserData = async () => {
         let userFetch = await fetchUsers();
         let userFetchData = await userFetch.json();
         setUsers(userFetchData);
     }
 
-    //Fetches Chat Data
     const getChatData = async () => {
         // console.log(id);
         let chatsFetch = await fetchChats(id);
@@ -30,7 +32,7 @@ export default function Groupchat(props) {
     // TODO: Compare passed in userid to users list and return name
     const getUsername = (userid) => {
         //  Confirming passed in id is right
-        console.log(userid);
+        // console.log(userid);
         //  if users._id does not === userid return and do nothing
         if (users._id !== userid) {
             return
@@ -40,15 +42,10 @@ export default function Groupchat(props) {
         }
     }
 
-    //Renders Chat Cards
     const renderCard = (card, index) => {
-        //  id === current groups id
-        //  card.group === a group id attached to the comment it's looping through
-        //  if id does not === card.group return and do nothing
-        
         if (id !== card.group) {
             return
-        }   // else if id does === card.group run the getUsername function and return comment card to page
+        }
         else if (id === card.group) {
             //  TODO: Go over this function and get it working
             let username = getUsername(card.user)
@@ -62,15 +59,11 @@ export default function Groupchat(props) {
         }
     }
 
-    //Fetches Group Data
-    // We only need to fetch this data to display the name at the top of the page
     const getGroupData = async () => {
-        // console.log(id);
         let groupFetch = await fetchGroup(id);
-        // console.log(groupFetch);
         let groupFetchData = await groupFetch.json();
-        // console.log(groupFetchData);
-        // setGroupID(id);
+        console.log(groupFetchData.name);
+        setGroupTitle(JSON.parse(groupFetchData.name));
     }
 
     useEffect( async () => {
@@ -93,7 +86,6 @@ export default function Groupchat(props) {
     }
 
     const createChatClick = ( e, req ) => {
-        //  Prevent page reload
         e.preventDefault();
         createChat({input, id});
     }
@@ -111,6 +103,7 @@ export default function Groupchat(props) {
                 <button type="button" className="btn col-2" onClick={deleteGroupClick}  style={{backgroundColor: "#41a19c", color: "white", fontWeight: "bold"}}>Delete Group</button>
             </div>
         </div>
+        <div>{groupTitle}</div>
             <div>
                 <MDBContainer>
                     <div className="row scrollbar scrollbar-near-moon mt-5 mx-auto" style={scrollContainerStyle}>
