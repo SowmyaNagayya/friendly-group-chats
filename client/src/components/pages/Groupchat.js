@@ -3,12 +3,25 @@ import { fetchGroup,  fetchChats, updateGroup, deleteGroup, createChat, fetchUse
 import {  Button, Form } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import { MDBContainer } from "mdbreact";
+import socketIOClient from "socket.io-client";
+
+const ENDPOINT = "http://127.0.0.1:4001";
+
+
 
 export default function Groupchat(props) {
     const { id } = useParams()
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput] = useState('');
+    const [response, setResponse] = useState("");
+
+    useEffect(() => {
+        const socket = socketIOClient(ENDPOINT);
+        socket.on("FromAPI", data => {
+        setResponse(data);
+        });
+    }, []);
 
     //Fetches User Data
     const getUserData = async () => {
@@ -57,6 +70,7 @@ export default function Groupchat(props) {
             return (
                 <div className="d-flex justify-content-center">
                     <p>{card.body}</p>
+                    <p>It's <time dateTime={response}>{response}</time></p>
                 </div>
             )
         }
