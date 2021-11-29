@@ -113,11 +113,11 @@ export default function Groupchat(props) {
         <>
         <div className="row">
             <div className="p-4 d-flex justify-content-center">
-                <button type="button" className="btn btn-primary col-2" onClick={UpdateGroupClick}>Update Group</button>
+                <button type="button" className="btn col-2" onClick={UpdateGroupClick} style={{backgroundColor: "#b490ca", color: "white", fontWeight: "bold"}}>Update Group</button>
                 &nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;
-                <button type="button" className="btn btn-danger col-2" onClick={deleteGroupClick}>Delete Group</button>
+                <button type="button" className="btn col-2" onClick={deleteGroupClick}  style={{backgroundColor: "#41a19c", color: "white", fontWeight: "bold"}}>Delete Group</button>
             </div>
         </div>
             <div>

@@ -71,7 +71,7 @@ export default function Dashboard(props) {
         <>
             <div className="row">
                 <div className="p-4 d-flex justify-content-center">
-                    <button type="button" class="btn btn-primary" onClick={createGroupclick}>Create New Group</button>
+                    <button type="button" class="btn" onClick={createGroupclick} style={{backgroundColor: "#b490ca", color: "white", fontWeight: "bold"}}>Create New Group</button>
                 </div>
                 <div className="row">
                     <div className="d-flex justify-content-center p-4">
