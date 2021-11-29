@@ -21,7 +21,7 @@ export default function Updategroup(props) {
     console.log(id)
     console.log(JSON.stringify(props) + "my group id");
     let groupFetch = await fetchUsers();
-    let groupFetchData = await groupFetch.json();    
+    let groupFetchData = await groupFetch.json();
 
     // This var should let us have a running list of all the users in the database
     //== console.log(JSON.stringify(groupFetchData) + "Hello");
@@ -33,7 +33,7 @@ export default function Updategroup(props) {
     })
     setAllUsers(options)
     //console.log(JSON.stringify(options) + " what options")
-       
+      
   } ,[])
 
   const handleInputChange = (event) => {
@@ -43,7 +43,6 @@ export default function Updategroup(props) {
 
   
   const handleFormSubmit = async (event) => {
-   
     event.preventDefault();
     const formGroup = event.currentTarget; 
     console.log("here" + updateGroupName + selectedUsers );
@@ -52,24 +51,18 @@ export default function Updategroup(props) {
           event.preventDefault();
           event.stopPropagation();
         }
-
     try {
       var name = updateGroupName;
       var users = selectedUsers;
-      
       var groupData = {name,users}
-     
       const response = await updateGroup( groupData,id)
       alert("Submitted");
 
-     
       if (!response.ok) {
               throw new Error('something went wrong!');
             }
-
             const group  = await response.json();
             const finalGroup = await group;
-            
     } catch (e) {
             console.log("Error")
             setShowAlert(true);
