@@ -3,7 +3,7 @@ const router = require('express').Router();
 //require CRUD functions from controller here
   const {
     createChat,
-    getAllChatsForOneGroup
+    getAllChatsForOneGroup,
   } = require('../../controllers/chat-controller')
 
 //use express router to get, post, put, delete here
