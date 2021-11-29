@@ -25,7 +25,7 @@ module.exports = {
 
   // get one group
   async getGroup({ params }, res) {
-    const group = await Group.findOne({where: { _id: params.id }});
+    const group = await Group.findOne({$or: [{ _id: params.id }]});
     console.log(group);
     if (!group) {
       return res.status(400).json({ message: 'No group found by that id' });
