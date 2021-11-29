@@ -117,7 +117,7 @@ const SignupForm = () => {
         <Button
           href="/"
           type="submit"
-          variant="primary"
+          style={{backgroundColor: "#b490ca", color: "white", fontWeight: "bold", border: "none"}}
         >
           Login Instead
         </Button>
