@@ -2,6 +2,7 @@ import React from "react";
 import {FaHome, FaRegWindowClose} from 'react-icons/fa';
 import Auth from '../utils/auth';
 import {userLogout } from "../utils/api";
+// import { logout } from "../../../server/controllers/user-controller";
 
 
 export default function Header() {
@@ -20,6 +21,7 @@ export default function Header() {
       };
 
       const handleLogout= () => {
+          Auth.logout();
           userLogout().then(response=> {
               window.location.replace("/")
           })
