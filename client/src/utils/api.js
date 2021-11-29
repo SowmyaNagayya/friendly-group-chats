@@ -48,6 +48,15 @@ export const createUser = (userData) => {
     });
   };
 
+  export const fetchUser = (id) => {
+    return fetch(`/api/user/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  };
+
   export const fetchChats = (id) => {
     return fetch(`/api/chat/${id}`, {
       method: 'GET',

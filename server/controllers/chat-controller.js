@@ -21,5 +21,7 @@ module.exports = {
         return res.status(400).json({message: 'No chats found'});
       }
       res.status(200).json(allChats);
-    }
+    },
+
+
 }

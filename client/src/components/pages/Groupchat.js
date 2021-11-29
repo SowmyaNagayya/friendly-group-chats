@@ -1,19 +1,19 @@
 import React, {useState, useEffect } from "react";
-import { fetchGroup,  fetchChats, deleteGroup, createChat, fetchUsers} from '../../utils/api';
+import { fetchGroup,  fetchChats, deleteGroup, createChat, fetchUsers, fetchUser} from '../../utils/api';
 import { Button, Form } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 import { MDBContainer } from "mdbreact";
 //hello
 
+
 export default function Groupchat() {
     const { id } = useParams()
-    console.log(id);
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput] = useState('');
+
     // const [ currentUser, setUser ] = useState('');
     const [ groupTitle, setGroupTitle ]= useState('');
-    console.log(groupTitle);
 
     const getUserData = async () => {
         let userFetch = await fetchUsers();
@@ -22,12 +22,16 @@ export default function Groupchat() {
     }
 
     const getChatData = async () => {
-        // console.log(id);
         let chatsFetch = await fetchChats(id);
-        // console.log(chatsFetch);
         let chatsFetchData = await chatsFetch.json();
-        // console.log(chatsFetchData);
         setChat(chatsFetchData);
+    }
+
+    const getSingleUser = async (userid) => {
+        console.log(userid);
+        let singleUser = await fetchUser(userid);
+        let singleUserData = await singleUser.json()
+        console.log(singleUserData);
     }
 
     // TODO: Compare passed in userid to users list and return name
@@ -39,7 +43,7 @@ export default function Groupchat() {
             return
         } //    else if users._id does === return that users.username
         else if (users._id === userid) {
-            return this
+            getSingleUser(userid);
         }
     }
 

@@ -61,10 +61,10 @@ module.exports = {
   },
   
   async getUser({ params }, res) {
-    const user = await User.findOne({where: { _id: params.id }});
-    console.log(user);
-    if (!group) {
-      return res.status(400).json({ message: 'No group found by that id' });
+    const user = await User.findOne({$or: [{ _id: params.id }]});
+    console.log(params);
+    if (!user) {
+      return res.status(400).json({ message: 'No user found by that id' });
     }
     res.status(200).json(user);
   },
