@@ -49,9 +49,10 @@ module.exports = {
     res.status(200).json(allUsers);
   },
 
-  async logout(req, res) {
-    if (req.session.loggedIn) {
+  async logout(req, res) {    
+    if (req.session.loggedIn) {      
       req.session.destroy(() => {
+        
         res.redirect('/');
       });
     } else {
