@@ -2,7 +2,6 @@ const {Chat} = require("../models");
 
 module.exports = { 
     async createChat(req, res) {
-      console.log(req.session.user_id)
         const chat = await Chat.create({
           body: req.body.input.body,
           user: req.session.user_id,
@@ -13,7 +12,7 @@ module.exports = {
           return res.status(400).json({message: 'Unable to create chat'});
         }
         res.status(200).json(chat);
-      },
+    },
 
     async getAllChatsForOneGroup (req, res) {
       const allChats = await Chat.find({where: { group: req.params.id}});
