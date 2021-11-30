@@ -25,7 +25,7 @@ app.use(session(sess));
 app.use(routes);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use('/*', express.static(path.join(__dirname, '../client/build')));
+  app.get('/*', express.static(path.join(__dirname, '../client/build')));
 }
 
 db.once('open', () => {
