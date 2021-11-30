@@ -18,7 +18,6 @@ module.exports = {
     });
     
   },
-  // create message still not sure if we are gonna have chats attached to user or group
 
   async userLogin({ body, session }, res) {
     const user = await User.findOne({ $or: [{ username: body.username }] });
