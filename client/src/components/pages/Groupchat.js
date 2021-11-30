@@ -14,7 +14,7 @@ export default function Groupchat() {
 
     anime({
         targets: '#target',
-        translateX: [-200, 200],
+        translateX: ['-10v', '10vw'],
         background: ['#b490ca', '#41a19c'],
         endDelay: 1000,
         loop: true,
@@ -42,7 +42,7 @@ export default function Groupchat() {
             let username = await getUsername(card.user)
             return (
 
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center" key={index}>
                     <p>{username}: {card.body}</p> 
                 </div>
             )
@@ -88,13 +88,13 @@ export default function Groupchat() {
           }
     }
 
-    const scrollContainerStyle = { width: "800px", maxHeight: "400px" };
+    const scrollContainerStyle = { width: "auto", maxHeight: "400px" };
 
     return (
         <>
             <div className="row">
                 <div className="d-flex p-3 justify-content-center">
-                    <div style={{backgroundColor: "#b490ca", fontSize: '40px', borderRadius: '25px', padding: '5px', color: "white", fontWeight: "bold"}} id="target">{groupTitle}</div>
+                    <div style={{backgroundColor: "#b490ca", fontSize: '2em', borderRadius: '25px', padding: '5px', color: "white", fontWeight: "bold"}} id="target">{groupTitle}</div>
                 </div>
             </div>
             <div className="row">
@@ -106,23 +106,25 @@ export default function Groupchat() {
                     <button type="button" className="btn col-lg-2 col-sm-5" onClick={deleteGroupClick}  style={{backgroundColor: "#41a19c", color: "white", fontWeight: "bold"}}>Delete Group</button>
                 </div>
             </div>
-            <div className="d-flex justify-content-flex-start">
-                <MDBContainer>
-                    <div className="row scrollbar scrollbar-near-moon mt-5 mx-auto" style={scrollContainerStyle}>
-                        <div className=''>{generatedContent.map(element=>element)}</div>
-                    </div>
-                </MDBContainer>
-            </div>
-            <div className="row p-4 col-md-12">
+            <div className="row">
                 <div className="d-flex justify-content-center">
-                    <Form onClick={createChatClick}   className="p-4" style={{ border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}}>
-                        <Form.Group className="mb-3" controlId="sendMessageForm">
-                            <Form.Control onChange={handleInput} name='body' type="text" placeholder="Message" className="col-4"/>
-                        </Form.Group>
-                        <div className="d-flex justify-content-center">
-                            <Button variant="secondary" type="submit" id="messageBtn">Send Message</Button>
+                    <MDBContainer className="d-flex justify-content-center">
+                        <div className="row scrollbar scrollbar-near-moon mt-5 mx-auto" style={scrollContainerStyle}>
+                            <div>{generatedContent.map(element=>element)}</div>
                         </div>
-                    </Form>
+                    </MDBContainer>
+                </div>
+                <div className="p-4 col-md-12">
+                    <div className="d-flex justify-content-center">
+                        <Form onClick={createChatClick}   className="p-4" style={{ border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}}>
+                            <Form.Group className="mb-3" controlId="sendMessageForm">
+                                <Form.Control onChange={handleInput} name='body' type="text" placeholder="Message" className="col-4"/>
+                            </Form.Group>
+                            <div className="d-flex justify-content-center">
+                                <Button variant="secondary" type="submit" id="messageBtn">Send Message</Button>
+                            </div>
+                        </Form>
+                    </div>
                 </div>
             </div>
         </>

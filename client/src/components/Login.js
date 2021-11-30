@@ -22,7 +22,7 @@ const LoginForm = () => {
         throw new Error('something went wrong!');
       }
 
-      const { token, user } = await response.json();
+      const { token } = await response.json();
       Auth.recordLogin(token);
 
     } catch (err) {

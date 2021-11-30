@@ -28,7 +28,7 @@ export default function Header() {
     
     const renderLogout = () => {
         if (Auth.loggedIn()) {
-            return <a href="#"
+            return <a href='/'
                 onClick={handleLogout}
                 style={{ fontSize: "18px", textDecoration: "none", textTransform: "uppercase", color: "white" }}>
                 <div className="bi d-flex justify-content-center mx-auto mb-1">

@@ -6,7 +6,6 @@ import Creategroup from './pages/Creategroup';
 import Dashboard from './pages/Dashboard';
 import Groupchat from './pages/Groupchat';
 import Updategroup from './pages/Updategroup';
-import Auth from '../utils/auth';
 import Chat from './pages/chat';
 
 export default function Container() {
