@@ -36,15 +36,17 @@ export default function Groupchat() {
 
     // TODO: Compare passed in userid to users list and return name
     const getUsername = async ( userid ) => {
-        // let singleUser = await fetchUser(userid);
-        // let singleUserData = await singleUser.json()
-        // console.log(singleUserData.username);
-        // return singleUserData.username
+        let singleUser = await fetchUser(userid);
+        let singleUserData = await singleUser.json()
+        console.log(singleUserData.username);
+        return (
+            <p>{singleUserData.username}</p>
+        )
         // let finalUserName = JSON.parse(singleUserData);
         // console.log(finalUserName);
         //  if users._id does not === userid return and do nothing
-        console.log(users);
-        console.log(userid);
+        // console.log(users);
+        // console.log(userid);
 
         // const finalUser = users.filter(checkUserId(userid));
         // console.log(finalUser);
@@ -72,6 +74,7 @@ export default function Groupchat() {
             // console.log(card);
             // console.log(card.user);
             let username = getUsername(card.user)
+            console.log(username);
             // let nextUsername = Promise.resolve(username);
             // console.log(username);
             
@@ -113,6 +116,7 @@ export default function Groupchat() {
 
     const createChatClick = ( e ) => {
         e.preventDefault();
+        console.log(input);
         createChat({input, id});
     }
 

@@ -31,6 +31,7 @@
     "nodemon": "^2.0.15",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",
+    "react-chat-plugin": "^0.1.17",
     "validator": "^13.7.0"
   }
 }
