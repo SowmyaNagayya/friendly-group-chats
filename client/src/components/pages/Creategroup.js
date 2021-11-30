@@ -7,15 +7,13 @@ export default function Creategroup() {
   const [allUsers, setAllUsers]=useState([])
   const [selectedUsers, setSelectedUsers]=useState([])
   const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
-  const options =null;
+
   useEffect( async () => {
     let userFetch = await fetchUsers();
     let userFetchData = await userFetch.json();    
 
     // This var should let us have a running list of all the users in the database
-    let options =userFetchData.map((item) => {
+    let options = userFetchData.map((item) => {
       return (
         <option key={item._id} value={item._id}>{item.username}
         </option>
@@ -34,7 +32,6 @@ export default function Creategroup() {
    
     event.preventDefault();
     const formGroup = event.currentTarget; 
-    console.log("here" + createGroupName.groupname + selectedUsers );
 
     if(formGroup.checkValidity() === false) {
           event.preventDefault();
@@ -49,6 +46,7 @@ export default function Creategroup() {
      
       const response = await createGroup( groupData)
       alert("Group created!");
+      window.location.href="/dashboard";
 
       if (!response.ok) {
               throw new Error('Something went wrong!');
@@ -58,7 +56,7 @@ export default function Creategroup() {
             
           } catch (e) {
             console.log("Error")
-            setShowAlert(true);
+            // setShowAlert(true);
           }
           setCreateGroupName(createGroupName)
           setSelectedUsers(selectedUsers)
