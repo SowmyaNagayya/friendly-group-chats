@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { fetchGroup,  fetchChats, deleteGroup, createChat, fetchUsers, fetchUser} from '../../utils/api';
 import { Button, Form } from 'react-bootstrap';
 import { useParams } from "react-router-dom";
@@ -7,6 +7,7 @@ import { MDBContainer } from "mdbreact";
 export default function Groupchat() {
     const { id } = useParams()
     const [ chat, setChat ] = useState([]);
+    const [ generatedContent, setgeneratedContent ] = useState([]);
     const [ users, setUsers ] = useState([]);
     const [ input, setInput ] = useState('');
     const [ groupTitle, setGroupTitle ]= useState('');
@@ -39,9 +40,7 @@ export default function Groupchat() {
         let singleUser = await fetchUser(userid);
         let singleUserData = await singleUser.json()
         console.log(singleUserData.username);
-        return (
-            <p>{singleUserData.username}</p>
-        )
+        return singleUserData.username
         // let finalUserName = JSON.parse(singleUserData);
         // console.log(finalUserName);
         //  if users._id does not === userid return and do nothing
@@ -65,7 +64,7 @@ export default function Groupchat() {
         // }
     }
 
-    const renderCard = ( card, index ) => {
+    const renderCard = async ( card, index ) => {
         if (id !== card.group) {
             return
         }
@@ -73,7 +72,7 @@ export default function Groupchat() {
             //  TODO: Go over this function and get it working
             // console.log(card);
             // console.log(card.user);
-            let username = getUsername(card.user)
+            let username = await getUsername(card.user)
             console.log(username);
             // let nextUsername = Promise.resolve(username);
             // console.log(username);
@@ -83,10 +82,13 @@ export default function Groupchat() {
             return (
                 <div className="d-flex justify-content-center">
                     <p>{card.body}</p> <br />
+                    <p>{username}</p>
                 </div>
             )
         }
     }
+
+
 
     const getGroupData = async () => {
         let groupFetch = await fetchGroup(id);
@@ -100,6 +102,10 @@ export default function Groupchat() {
         getGroupData();
         getUserData();
     }, [])
+
+    useEffect( () => {
+        Promise.all(chat.map(renderCard)).then(xyz => setgeneratedContent(xyz))
+    }, [chat])
 
     const UpdateGroupClick = () => {
         window.location.href="/editgroup/" + id;
@@ -116,11 +122,19 @@ export default function Groupchat() {
 
     const createChatClick = ( e ) => {
         e.preventDefault();
-        console.log(input);
         createChat({input, id});
     }
 
     const scrollContainerStyle = { width: "800px", maxHeight: "400px" };
+
+    // const generateCards = useCallback( async () => {
+    //     //useMemo
+    //     const cards = [];
+    //     for(const ch of chat){
+    //         cards.push(await renderCard(ch))
+    //     }
+    //     return cards
+    // }, [chat])
 
     return (
         <>
@@ -137,7 +151,7 @@ export default function Groupchat() {
             <div>
                 <MDBContainer>
                     <div className="row scrollbar scrollbar-near-moon mt-5 mx-auto" style={scrollContainerStyle}>
-                        <div className='row'>{chat.map(renderCard)}</div>
+                        <div className='row'>{generatedContent.map(element=>element)}</div>
                     </div>
                 </MDBContainer>
             </div>
