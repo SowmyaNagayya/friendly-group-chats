@@ -21,11 +21,16 @@ export default function Dashboard(props) {
             <div className="p-4">
                 <Card className="p-3" style={{ width: '18rem', border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray" }} key={index}>
                     <Card.Body>
-                        <Card.Title>{card.name}</Card.Title>
-                        <Card.Text>
-                            This is where most recent message will go
-                        </Card.Text>
-                        <Button id={card._id} variant="secondary" onClick={certainGroupClick}>Go to Group</Button>
+                        <div className="row">
+                            <div className="d-flex justify-content-center">
+                                <Card.Title>{card.name}</Card.Title>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="d-flex justify-content-center">
+                                <Button id={card._id} variant="secondary" onClick={certainGroupClick}>Go to Group</Button>
+                            </div>
+                        </div>
                     </Card.Body>
                 </Card>
             </div>
@@ -39,8 +44,6 @@ export default function Dashboard(props) {
     const certainGroupClick = (e) => {
 
         const id = e.currentTarget.id;
-        console.log(id.trim());
-
         const newid = id.trim()
         window.location.href=`/group/${newid}`;
     }
@@ -55,7 +58,7 @@ export default function Dashboard(props) {
                     <button type="button" class="btn" onClick={createGroupclick} style={{backgroundColor: "#b490ca", color: "white", fontWeight: "bold"}}>Create New Group</button>
                 </div>
                 <div className="row">
-                    <div className="d-flex justify-content-center p-4">
+                    <div className="d-flex justify-content-center p-4 flex-wrap">
                         {groups.map(renderCard)}
                     </div>
                 </div>

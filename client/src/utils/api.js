@@ -77,7 +77,6 @@ export const createUser = (userData) => {
 
   //Create group data
   export const createGroup = (groupData) => {
-    alert("hello");
     return fetch('/api/group/', {
       method: 'POST',
       headers: {
@@ -89,7 +88,6 @@ export const createUser = (userData) => {
 
   //Update Group
   export const updateGroup = (updategroupData,id) => {
-    alert("hello");
     return fetch('/api/group/' + id, {
       method: 'PUT',
       headers: {
@@ -101,7 +99,6 @@ export const createUser = (userData) => {
 
   //Delete group
   export const deleteGroup = (id) => {
-    alert("hello");
     return fetch('/api/group/' + id, {
       method: 'DELETE',
       headers: {
@@ -113,7 +110,6 @@ export const createUser = (userData) => {
 
   //Create chat
   export const createChat = (data) => {
-    console.log(data);
     return fetch('/api/chat/', {
       method: 'POST',
       headers: {

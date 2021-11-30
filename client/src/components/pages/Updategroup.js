@@ -1,71 +1,57 @@
 import React, {useState, useEffect } from "react";
-import { fetchGroup ,fetchUsers,updateGroup} from '../../utils/api';
-import { Form,Select, Button } from 'react-bootstrap';
+import { fetchGroup, fetchUsers, updateGroup} from '../../utils/api';
+import { Form, Button } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
-//import { param } from "../../../../server/routes/api";
-
-// import {userLogin} from '../utils/api';
-// import Auth from '../utils/auth';
 
 export default function Updategroup(props) {
-  const [updateGroupName, setUpdateGroupName] = useState("");
   const [allUsers, setAllUsers]=useState([])
   const [selectedUsers, setSelectedUsers]=useState([])
   const [validated] = useState(false);
-  const {id} = useParams()
-  // set state for alert
-  
-  const [showAlert, setShowAlert] = useState(false);
-  const options =null;
+  const {id} = useParams();
+  const [ groupTitle, setGroupTitle ]= useState('');
+  const [updateGroupName, setUpdateGroupName] = useState('');
+
   useEffect( async () => {
-    console.log(id)
-    console.log(JSON.stringify(props) + "my group id");
     let groupFetch = await fetchUsers();
     let groupFetchData = await groupFetch.json();
-
-    // This var should let us have a running list of all the users in the database
-    //== console.log(JSON.stringify(groupFetchData) + "Hello");
     let options =groupFetchData.map((item) => {
       return (
         <option key={item._id} value={item._id}>{item.username}
         </option>
       )
     })
-    setAllUsers(options)
-    //console.log(JSON.stringify(options) + " what options")
+    setAllUsers(options);
+    getGroupData()
       
   } ,[])
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUpdateGroupName(value);
-  };
+  const getGroupData = async () => {
+    let groupFetch = await fetchGroup(id);
+    let groupFetchData = await groupFetch.json();
+    setGroupTitle(JSON.parse(groupFetchData.name));
+  }
 
-  
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const formGroup = event.currentTarget; 
-    console.log("here" + updateGroupName + selectedUsers );
     
     if(formGroup.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
         }
     try {
-      var name = updateGroupName;
+      var name = JSON.stringify(updateGroupName);
       var users = selectedUsers;
       var groupData = {name,users}
       const response = await updateGroup( groupData,id)
-      alert("Submitted");
+      alert("Group Updated!");
+      window.location.href=`/group/${id}`;
 
       if (!response.ok) {
               throw new Error('something went wrong!');
             }
-            const group  = await response.json();
-            const finalGroup = await group;
     } catch (e) {
             console.log("Error")
-            setShowAlert(true);
       }
       setUpdateGroupName(updateGroupName)
       setSelectedUsers(selectedUsers)
@@ -81,19 +67,7 @@ export default function Updategroup(props) {
     }
 
     setSelectedUsers(value);
-    //alert(value + "my selected values")
   }
-
-  const handleUpdateGroup = () => {
-    const groupData = {
-
-    }
-    console.log(updateGroupName,selectedUsers)
-  }
-
-  
-
-    
 
     return (
      <div class="p-4 d-flex justify-content-center">
@@ -102,7 +76,7 @@ export default function Updategroup(props) {
                 <Form.Label htmlFor="groupname">Groupname</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Your Groupname"
+                  placeholder={groupTitle}
                   onChange={(event)=> setUpdateGroupName(event.target.value)}
                   value={updateGroupName}
                   required
@@ -111,16 +85,9 @@ export default function Updategroup(props) {
                 <Form.Control name="" as="select" multiple onChange={handleUserChange}>
                   {allUsers}
                 </Form.Control>
-                      {/* <Form.Select
-                        data={userFetchData.map((item) =>item.username)}
-                        selectMultiple={true}
-                        touchUi={false}
-                      /> */}
             </Form.Group>
             <div className="d-flex justify-content-center">
                 <Button
-                //  disabled={!(createGroup.name && allUsers.username)}
-                  handleUpdateGroup={handleUpdateGroup}
                   type="submit"
                   variant="secondary" >
                   Update Group
