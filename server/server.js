@@ -21,12 +21,15 @@ const sess = {
 };
 
 app.use(session(sess));
+//hello
 
+// if (process.env.NODE_ENV === 'production') {
+//   console.log("Production environment detected, enabling response of built React client.")
+//   app.use(express.static(path.join(__dirname, '../client/build')));
+// }
+
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(routes);
-
-if (process.env.NODE_ENV === 'production') {
-  app.get('/*', express.static(path.join(__dirname, './client/build')));
-}
 
 db.once('open', () => {
   app.listen(PORT, () => console.log(`Now listening on localhost: ${PORT}`));
