@@ -23,9 +23,11 @@ const sess = {
 app.use(session(sess));
 
 // if (process.env.NODE_ENV === 'production') {
+//   console.log("Production environment detected, enabling response of built React client.")
 //   app.use(express.static(path.join(__dirname, '../client/build')));
 // }
 
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(routes);
 
 db.once('open', () => {
