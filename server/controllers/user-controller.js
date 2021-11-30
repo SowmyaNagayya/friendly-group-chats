@@ -61,7 +61,6 @@ module.exports = {
   
   async getUser({ params }, res) {
     const user = await User.findOne({$or: [{ _id: params.id }]});
-    console.log(params);
     if (!user) {
       return res.status(400).json({ message: 'No user found by that id' });
     }

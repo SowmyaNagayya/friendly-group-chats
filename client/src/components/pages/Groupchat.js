@@ -65,9 +65,15 @@ export default function Groupchat() {
         setInput({...input, [e.target.name]: e.target.value});
     }
 
-    const createChatClick = ( e ) => {
+    const createChatClick = async ( e ) => {
         e.preventDefault();
-        createChat({input, id});
+        try {
+            await createChat({input, id});
+            window.location.href=`/group/${id}`
+        }
+        catch (err) {
+            console.error(err);
+          }
     }
 
     const scrollContainerStyle = { width: "800px", maxHeight: "400px" };
