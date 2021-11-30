@@ -1,18 +1,14 @@
-import React, {useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchGroup,  fetchChats, deleteGroup, createChat, fetchUsers, fetchUser} from '../../utils/api';
 import { Button, Form } from 'react-bootstrap';
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MDBContainer } from "mdbreact";
-//hello
-
 
 export default function Groupchat() {
     const { id } = useParams()
     const [ chat, setChat ] = useState([]);
     const [ users, setUsers ] = useState([]);
-    const [ input, setInput] = useState('');
-
-    // const [ currentUser, setUser ] = useState('');
+    const [ input, setInput ] = useState('');
     const [ groupTitle, setGroupTitle ]= useState('');
 
     const getUserData = async () => {
@@ -27,38 +23,63 @@ export default function Groupchat() {
         setChat(chatsFetchData);
     }
 
-    const getSingleUser = async (userid) => {
-        console.log(userid);
-        let singleUser = await fetchUser(userid);
-        let singleUserData = await singleUser.json()
-        console.log(singleUserData);
+    // const getSingleUser = async (userid) => {
+    //     console.log(userid);
+    //     let singleUser = await fetchUser(userid);
+    //     let singleUserData = await singleUser.json()
+    //     console.log(singleUserData);
+    // }
+
+    const checkUserId = (id) => {
+        return id === users._id
     }
 
     // TODO: Compare passed in userid to users list and return name
-    const getUsername = (userid) => {
-        //  Confirming passed in id is right
-        // console.log(userid);
+    const getUsername = async ( userid ) => {
+        // let singleUser = await fetchUser(userid);
+        // let singleUserData = await singleUser.json()
+        // console.log(singleUserData.username);
+        // return singleUserData.username
+        // let finalUserName = JSON.parse(singleUserData);
+        // console.log(finalUserName);
         //  if users._id does not === userid return and do nothing
-        if (users._id !== userid) {
-            return
-        } //    else if users._id does === return that users.username
-        else if (users._id === userid) {
-            getSingleUser(userid);
-        }
+        console.log(users);
+        console.log(userid);
+
+        // const finalUser = users.filter(checkUserId(userid));
+        // console.log(finalUser);
+
+
+
+
+
+        // if ( users._id !== userid ) {
+        //     // console.log('something aint right here');
+        //     return
+        // } //    else if users._id does === return that users.username
+        // else if ( users._id === userid ) {
+        //     console.log(users);
+        //     return
+        // }
     }
 
-    const renderCard = (card, index) => {
+    const renderCard = ( card, index ) => {
         if (id !== card.group) {
             return
         }
-        else if (id === card.group) {
+        else if ( id === card.group ) {
             //  TODO: Go over this function and get it working
+            // console.log(card);
+            // console.log(card.user);
             let username = getUsername(card.user)
+            // let nextUsername = Promise.resolve(username);
+            // console.log(username);
+            
             //  Used this console to check what I was getting back not needed for functionality
             // console.log(username);
             return (
                 <div className="d-flex justify-content-center">
-                    <p>{card.body}</p>
+                    <p>{card.body}</p> <br />
                 </div>
             )
         }
@@ -86,11 +107,11 @@ export default function Groupchat() {
         window.location.href="/dashboard";
     }
 
-    const handleInput = (e) => {
+    const handleInput = ( e ) => {
         setInput({...input, [e.target.name]: e.target.value});
     }
 
-    const createChatClick = ( e, req ) => {
+    const createChatClick = ( e ) => {
         e.preventDefault();
         createChat({input, id});
     }
