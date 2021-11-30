@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-
 import { createUser } from '../utils/api';
 import Auth from '../utils/auth';
 
@@ -32,15 +31,12 @@ const SignupForm = () => {
 
     try {
       const response = await createUser(userFormData);
-
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
-
-      const user  = await response.json();
+      const user = await response.json();
       const finalUser = await user;
       Auth.recordLogin(finalUser.token);
-      
     } catch (err) {
       console.error(err);
       setShowAlert(true);
@@ -54,75 +50,75 @@ const SignupForm = () => {
 
   return (
     <>
-    <div className="row">
-      <div className="d-flex justify-content-center p-4">
-        <Form style={{ width: "30rem", border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray"}} noValidate validated={validated} onSubmit={handleFormSubmit}>
-          <Alert
-            dismissible
-            onClose={() => setShowAlert(false)}
-            show={showAlert}
-            variant="danger"
-          >
-            Something went wrong with your signup!
-          </Alert>
-
-          <Form.Group className='p-4'>
-            <Form.Label htmlFor="username">Username</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Your username"
-              name="username"
-              onChange={handleInputChange}
-              value={userFormData.username}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Username is required!
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group className='p-4'>
-            <Form.Label htmlFor="password">Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Your password"
-              name="password"
-              onChange={handleInputChange}
-              value={userFormData.password}
-              required
-            />
-            <Form.Control.Feedback type="invalid">
-              Password is required!
-            </Form.Control.Feedback>
-          </Form.Group>
-          <div className="p-4 d-flex justify-content-center">
-            <Button
-              disabled={
-                !(
-                  userFormData.username &&
-                  userFormData.password
-                )
-              }
-              type="submit"
-              variant="secondary"
+      <div className="row">
+        <div className="d-flex justify-content-center p-4">
+          <Form style={{ width: "30rem", border: ".5rem solid #539987", boxShadow: "5px 5px 10px gray" }} noValidate validated={validated} onSubmit={handleFormSubmit}>
+            <Alert
+              dismissible
+              onClose={() => setShowAlert(false)}
+              show={showAlert}
+              variant="danger"
             >
-              Sign-up!
-            </Button>
-          </div>
-        </Form>
+              Something went wrong with your signup!
+            </Alert>
+
+            <Form.Group className='p-4'>
+              <Form.Label htmlFor="username">Username</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Your username"
+                name="username"
+                onChange={handleInputChange}
+                value={userFormData.username}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Username is required!
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group className='p-4'>
+              <Form.Label htmlFor="password">Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Your password"
+                name="password"
+                onChange={handleInputChange}
+                value={userFormData.password}
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                Password is required!
+              </Form.Control.Feedback>
+            </Form.Group>
+            <div className="p-4 d-flex justify-content-center">
+              <Button
+                disabled={
+                  !(
+                    userFormData.username &&
+                    userFormData.password
+                  )
+                }
+                type="submit"
+                variant="secondary"
+              >
+                Sign-up!
+              </Button>
+            </div>
+          </Form>
+        </div>
       </div>
-    </div>
-    <div className="row">
-      <div className="d-flex justify-content-center">
-        <Button
-          href="/"
-          type="submit"
-          style={{backgroundColor: "#b490ca", color: "white", fontWeight: "bold", border: "none"}}
-        >
-          Login Instead
-        </Button>
+      <div className="row">
+        <div className="d-flex justify-content-center">
+          <Button
+            href="/"
+            type="submit"
+            style={{ backgroundColor: "#b490ca", color: "white", fontWeight: "bold", border: "none" }}
+          >
+            Login Instead
+          </Button>
+        </div>
       </div>
-    </div>
     </>
   );
 };

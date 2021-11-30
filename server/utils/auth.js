@@ -8,7 +8,6 @@ module.exports = {
     // allows token to be sent via req.body, req.query, or headers
     let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
     }
@@ -26,15 +25,15 @@ module.exports = {
 
     return req;
   },
-   withAuth: (req, res, next) => {
+  withAuth: (req, res, next) => {
     // If the user is not logged in, redirect the request to the login route
     console.log(req.session)
-     if (!req.session.user_id) {
-       res.redirect("/");
-     } else {
-       next();
-     }
-   },
+    if (!req.session.user_id) {
+      res.redirect("/");
+    } else {
+      next();
+    }
+  },
   signToken: function ({ username, password, _id }) {
     const payload = { username, password, _id };
 
