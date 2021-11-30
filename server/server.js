@@ -21,6 +21,7 @@ const sess = {
 };
 
 app.use(session(sess));
+//hello
 
 // if (process.env.NODE_ENV === 'production') {
 //   console.log("Production environment detected, enabling response of built React client.")
