@@ -6,7 +6,6 @@ import Creategroup from './pages/Creategroup';
 import Dashboard from './pages/Dashboard';
 import Groupchat from './pages/Groupchat';
 import Updategroup from './pages/Updategroup';
-import Chat from './pages/chat';
 
 export default function Container() {
 
@@ -16,7 +15,6 @@ export default function Container() {
           <Router>
             <Routes>
               <Route exact path="/" element={<Login />} />
-              <Route exact path="/chat" element={<Chat />} />
               <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path='/signup' element={<Signup />} />
               <Route exact path="/group/:id" element={<Groupchat />} />
