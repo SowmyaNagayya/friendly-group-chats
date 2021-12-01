@@ -1,101 +1,68 @@
-import ChatBox, { ChatFrame } from 'react-chat-plugin';
-import { useState } from 'react';
- 
-export default function Example() {
-  const [attr, setAttr] = useState({
-    showChatbox: false,
-    showIcon: true,
-    messages: [
-      {
-        text: 'user2 has joined the conversation',
-        timestamp: 1578366389250,
-        type: 'notification',
-      },
-      {
-        author: {
-          username: 'user1',
-          id: 1,
-          avatarUrl: 'https://image.flaticon.com/icons/svg/2446/2446032.svg',
-        },
-        text: 'Hi',
-        type: 'text',
-        timestamp: 1578366393250,
-      },
-    //   {
-    //     author: { username: 'user2', id: 2, avatarUrl: null },
-    //     text: 'Show two buttons',
-    //     type: 'text',
-    //     timestamp: 1578366425250,
-    //     buttons: [
-    //       {
-    //         type: 'URL',
-    //         title: 'Yahoo',
-    //         payload: 'http://www.yahoo.com',
-    //       },
-    //       {
-    //         type: 'URL',
-    //         title: 'Example',
-    //         payload: 'http://www.example.com',
-    //       },
-    //     ],
-    //   },
-    //   {
-    //     author: {
-    //       username: 'user1',
-    //       id: 1,
-    //       avatarUrl: 'https://image.flaticon.com/icons/svg/2446/2446032.svg',
-    //     },
-    //     text: "What's up?",
-    //     type: 'text',
-    //     timestamp: 1578366425250,
-    //     hasError: true,
-    //   },
-    ],
-  });
-  const handleClickIcon = () => {
-    // toggle showChatbox and showIcon
-    setAttr({
-      ...attr,
-      showChatbox: !attr.showChatbox,
-      showIcon: !attr.showIcon,
-    });
+import React from 'react';
+import Chat from '../../lib';
+
+// Info of participants in the chat
+const user1 = {
+  name: 'Sowmya',
+  id: '1004',
+  imageUrl:
+    'https://cdn.vox-cdn.com/thumbor/8vF1atBpBCuBB0guzWVeHieVwCA=/99x0:1179x810/920x613/filters:focal(99x0:1179x810):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/46094226/Jon_snow.0.jpg'
+};
+
+const user2 = {
+  name: 'Tanner',
+  id: '1005',
+  imageUrl:
+    'https://vignette.wikia.nocookie.net/gameofthrones/images/e/ee/QueenDaenerysTargaryenIronThrone.PNG/revision/latest?cb=20190520173137'
+};
+
+const userRoles = {
+  [user1.id]: 'Jon Snow',
+  [user2.id]: 'Daenerys Targaryen'
+};
+
+const ChatApp = () => {
+  // Function to switch current user i.e "you" in the chat and reload the chat in the new role
+  const currentUserId = localStorage.getItem('currentUserId') || user1.id;
+  if (currentUserId !== user1.id || currentUserId !== user2.id) {
+    localStorage.removeItem('currentUserId');
+  }
+  const switchRoles = () => {
+    if (currentUserId === user1.id) {
+      localStorage.setItem('currentUserId', user2.id);
+    } else {
+      localStorage.setItem('currentUserId', user1.id);
+    }
+    window.location.reload();
   };
-  const handleOnSendMessage = (message) => {
-    setAttr({
-      ...attr,
-      messages: attr.messages.concat({
-        author: {
-          username: 'user1',
-          id: 1,
-          avatarUrl: 'https://image.flaticon.com/icons/svg/2446/2446032.svg',
-        },
-        text: message,
-        type: 'text',
-        timestamp: +new Date(),
-      }),
-    });
-  };
+
+  // Get receiver info based on who the current user is
+  const getReceiver = () => (currentUserId === user1.id ? user2 : user1);
+
   return (
-    <ChatFrame
-      chatbox={
-        <ChatBox
-          onSendMessage={handleOnSendMessage}
-          userId={1}
-          messages={attr.messages}
-          width={'300px'}
-          showTypingIndicator={true}
-          activeAuthor={{ username: 'user2', id: 2, avatarUrl: null }}
-        />
-      }
-      
-      clickIcon={handleClickIcon}
-      showChatbox={attr.showChatbox}
-      showIcon={attr.showIcon}
-      iconStyle={{ background: 'red', fill: 'white' }}
-    >
-      <div className="Greeting" style={{ width: '300px' }}>
-        👋 Hey, I’m a ChatBot! Want to see what I can do?
-      </div>
-    </ChatFrame>
+    <div className="App">
+      <Chat
+        config={{
+          apiKey: 'AIzaSyBdtn-6kbnWviIeDSPEbofK8czP1u9dioM',
+          authDomain: 'chat-app-775a1.firebaseapp.com',
+          databaseURL: 'https://chat-app-775a1.firebaseio.com',
+          projectId: 'chat-app-775a1',
+          storageBucket: 'chat-app-775a1.appspot.com',
+          messagingSenderId: '249012927295',
+          appId: '1:249012927295:web:035ae95584ff77d4'
+        }}
+        currentUserId={currentUserId}
+        receiver={getReceiver()}
+        height="500px"
+        themeColor="#3C5A99"
+        textColor="#fff"
+      />
+      <span>You are currently in the role of: {userRoles[currentUserId]}</span>
+      <button className="btn" onClick={switchRoles}>
+        Switch role
+      </button>
+    </div>
   );
-}
+};
+
+export default ChatApp;

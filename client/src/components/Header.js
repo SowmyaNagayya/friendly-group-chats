@@ -44,7 +44,7 @@ export default function Header() {
         <header style={{ backgroundColor: "#539987", color: "white" }}>
             <div className="px-3 py-2" id="header">
                 <div className="container row">
-                    <div className="col-md-12 col-lg-5 d-flex align-items-center justify-content-center">
+                    <div className="col-md-12 col-lg-5 d-flex align-items-center justify-content-center ">
                         <h1 id="header-name">Friendly Group Chats</h1>
                     </div>
                     <div className="d-flex col-md-12 col-lg-7 justify-content-center">
