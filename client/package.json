@@ -14,24 +14,69 @@
     "@testing-library/user-event": "^12.8.3",
     "animejs": "^3.2.1",
     "bootstrap": "^5.1.3",
+    "date-fns": "^1.30.1",
+    "file-loader": "^4.0.0",
+    "firebase": "^5.8.2",
+    "jquery": "^3.4.1",
     "jwt-decode": "^3.1.2",
     "mdbreact": "^5.2.0",
+    "node-sass": "^4.14.1",
+    "path": "^0.12.7",
+    "prop-types": "^15.6.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.2",
     "react-chat-plugin": "^0.1.17",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-query": "^3.33.6",
+    "react-redux": "^5.1.1",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.2",
     "socket.io-client": "^4.4.0",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf dist && babel src/lib --out-dir dist --copy-files",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -c .storybooks"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "devDependencies": {
+    "@storybook/cli": "^4.0.8",
+    "@storybook/react": "^4.0.8",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-loader": "8.0.6"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ],
+    "env": {
+      "test": {
+        "plugins": [
+          "transform-es2015-modules-commonjs"
+        ]
+      }
+    }
   },
   "eslintConfig": {
     "extends": [
