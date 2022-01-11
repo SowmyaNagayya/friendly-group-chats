@@ -18,9 +18,9 @@ This is a group chat application where you can message your friends.
 
 Clone the repo down and run npm install inside the root folder. Then once everything is installed you can run npm run develop to start the server to see the site.
 
-## Usage
+## Screenshot of homepage
 
-Put screen shots here
+![Here is a screen shot of the final page/homepage.](../client/src/images/FriendlyMessenger.png).
 
 ## License
 
@@ -76,6 +76,10 @@ passport
 passport-jwt  
 react-chat-plugin  
 validator
+
+## Link to deployed page
+
+You can also refer to this [gitHub](https://friendly-group.herokuapp.com/)
 
 ## Questions
 
