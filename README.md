@@ -20,7 +20,7 @@ Clone the repo down and run npm install inside the root folder. Then once everyt
 
 ## Screenshot of homepage
 
-![Here is a screen shot of the final page/homepage.](../client/src/images/FriendlyMessenger.png).
+![Here is a screen shot of the final page/homepage.](../friendly-group-chats/client/src/images/FriendlyMessenger.png).
 
 ## License
 
